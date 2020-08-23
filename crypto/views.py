@@ -3,4 +3,4 @@ from django.http import HttpResponse
 # Create your views here.
 
 def loginView(request):
-  return HttpResponse('new project')
+  return render(request, 'login.html')
