@@ -25,7 +25,6 @@ def homeView(request):
   client = Client(API_KEY, API_SECRET, api_version='2020-08-25')
   currency_code = 'USD'
   price = client.get_spot_price(currency=currency_code)
-  rates = client.get_exchange_rates(currency='BTC')
-  a = json.dumps(price)
-  b = json.dumps(rates)
-  return HttpResponse(b)
+  # rates = client.get_exchange_rates(currency='BTC')
+  price_str = json.dumps(price)
+  return HttpResponse(price_str)

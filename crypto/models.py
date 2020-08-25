@@ -14,7 +14,7 @@ class Transaction(models.Model):
   seller = models.ForeignKey(User, on_delete=models.CASCADE, related_name='seller', null=True)
   buyer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='buyer', null=True)
   amount = models.IntegerField(blank=False)
-  transaction_fee = models.IntegerField(blank=True, null=True)
+  transaction_fee = models.IntegerField(blank=True, null=True, editable=True)
   created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
   #auto_now_add = True sets the current UTC time upon creation
   market_price = models.IntegerField(blank=False)
