@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from coinbase.wallet.client import Client
+from django.http import JsonResponse
 import json
 import os
 import environ
@@ -12,14 +13,18 @@ environ.Env.read_env()
 
 print(os.environ.get('API_KEY'))
 
-def loginView(request):
+def login_view(request):
   return render(request, 'login.html')
 
 
 
-def homeView(request):
+def home_view(request):
   # url = "https://blockchain.info/ticker"
   # ex_rate = json.loads(requests.get(url))
+  return render(request, 'home.html')
+
+
+def get_spot():
   API_KEY=os.environ.get('API_KEY')
   API_SECRET=os.environ.get('API_SECRET')
   client = Client(API_KEY, API_SECRET, api_version='2020-08-25')
