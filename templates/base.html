@@ -16,19 +16,20 @@
     <div class="conatiner">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand pl-5" href="">Navbar</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+<!--       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-      </button>
+      </button> -->
       <div>
         <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="nav-item pl-5 pr-5" role="presentation">
-            <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="false">Home</a>
+          <li>
+            <a class="nav-item pl-5 pr-5 nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="false">Home</a>
           </li>
-          <li class="nav-item pl-5 pr-5" role="presentation">
-            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+          <!--the li above is missing role=presentation-->
+          <li>
+            <a class="nav-item pl-5 pr-5 nav-link" role="presentation"id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
           </li>
-          <li class="nav-item pl-5 pr-5" role="presentation">
-            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+          <li>
+            <a class="nav-item pl-5 pr-5 nav-link" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
           </li>
         </ul>
         <div class="tab-content" id="myTabContent">
