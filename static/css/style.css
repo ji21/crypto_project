@@ -6,7 +6,10 @@
 
 .main-title {
   color: #61DAFB!important;
-  font-size: 40px;
+  font-size: 30px;
+  text-align: center;
+  margin: auto;
+  width: 100%;
 }
 
 .main-title:hover {
