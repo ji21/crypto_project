@@ -1,6 +1,6 @@
 #content {
-  width: calc(100% - 19rem);
-  margin-left: 19rem;
+  width: calc(100% - 15rem);
+  margin-left: 15rem;
   transition: all 0.4s;
 }
 
@@ -15,6 +15,7 @@
 
 .fade-height {
   height: 4rem!important;
+  transition: all 0.4s;
 }
 
 .nav-height {
@@ -40,8 +41,8 @@
 }
 
 .vertical-nav {
-  min-width: 19rem;
-  width: 19rem;
+  min-width: 15rem;
+  width: 15rem;
   height: 100vh;
   position: fixed;
   top: 0;
@@ -58,9 +59,15 @@
 }
 
 .adjusted-width {
-  width: calc(100% - 19rem);
-  margin-left: 19rem;
+  width: calc(100% - 15rem);
+  margin-left: 15rem;
   transition: all 0.4s;
+}
+
+a:hover {
+  border-left: 1px solid #282C34!important;
+  border-right: 1px solid #282C34!important;
+  border-top: 1px solid #282C34!important;
 }
 
 .border-top-right {
