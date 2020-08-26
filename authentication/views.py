@@ -5,3 +5,8 @@ from django.views import View
 class loginView(View):
   def get(self, request):
     return render(request, 'authenticate/login.html')
+
+
+class regView(View):
+  def get(self, request):
+    return render(request, 'authenticate/register.html')

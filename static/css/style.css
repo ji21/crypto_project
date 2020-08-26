@@ -77,8 +77,47 @@
   width: 100%;
 }
 
-canvas {
-  width: 15rem;
+#particles-js {
+  position: absolute;
+}
+
+#particles-js > a {
+  position: relative;
+  top: 17em;
+  text-align: center;
+  left: 32%;
+  color: #61DAFB!important;
+  font-size: 16px;
+}
+
+#particles-js > a:hover {
+  text-decoration: none;
+  opacity: 0.7;
+  border: 1px solid white!important;
+}
+
+.login-btn {
+  width: 40%;
+  margin: 0 auto;
+  background-color: #282C34;
+  height: 20px;
+  border: 1px solid white;
+}
+
+.register {
+  position: relative;
+  top: 20em;
+  text-align: center;
+  left: 0;
+  color: white!important;
+  font-size: 14px;
+  background-color: #282C34;
+  border: 1px solid #282C34;
+}
+
+.register > a {
+  border: 1px solid #282C34;
+  color: white;
 }
 
 .adjusted-width {
@@ -97,6 +136,10 @@ a:hover {
   border-left: 1px solid #282C34!important;
   border-right: 1px solid #282C34!important;
   border-top: 1px solid #282C34!important;
+}
+
+.radius {
+  border-radius: 1rem;
 }
 
 .border-top-right {
