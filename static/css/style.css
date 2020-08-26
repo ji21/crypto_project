@@ -9,6 +9,10 @@
   font-size: 40px;
 }
 
+.main-title:hover {
+  border: none!important;
+}
+
 .hidden {
   display: none;
 }
