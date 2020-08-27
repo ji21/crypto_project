@@ -15,17 +15,20 @@
     <div class="conatiner">
     <div class="vertical-nav">
       <a class="navbar-brand mt-2 pl-3 pr-3 pt-4 pb-2 main-title" href="">Byte</a>
-      <div id="particles-js">
-        <a class="login-btn pt-2 pb-2 pl-4 pr-4 radius">Login</a>
-        <div class="register pr-3 pt-2 pl-3 pb-3">Don't have an account? <a href="{% url 'register' %}">Sign up.</a></div>
+      <div id="particles-js" class="center">
+          <img src="{% static 'images/letter-b.png' %}" alt="">
+          <a class="login-btn pt-2 pb-2 pl-4 pr-4 radius">Login</a>
+          <div class="register pr-3 pt-2 pl-3 pb-3">Don't have an account? <a href="{% url 'register' %}">Sign up.</a></div>
       </div>
     </div>
-    <nav class="navbar navbar-expand-lg navbar-dark pb-3 adjusted-width pl-0 fixed-top" id="navbar" style="background-color: #282C34!important">
+<!--     <div id="spacer"></div>
+ -->  <nav class="navbar navbar-expand-lg navbar-dark pb-3 adjusted-width pl-0 fixed-t" id="navbar" style="background-color: #282C34!important">
       <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
     -->
-      <div>
+      <div id="spacer"></div>
+      <div style="width: 85%;">
         <ul class="nav nav-tabs no-border-bottom pt-4" id="myTab" role="tablist" style="color: white!important">
           <li class="no-border">
             <a class="nav-item pl-5 pr-5 nav-link nav-info no-border-bottom" id="about-tab" data-toggle="tab" href="#about" role="tab" aria-controls="about" aria-selected="true">About</a>

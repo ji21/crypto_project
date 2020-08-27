@@ -1,6 +1,6 @@
 #content {
-  width: calc(100% - 15rem);
-  margin-left: 15rem;
+  width: calc(100% - 15%);
+  margin-left: 15%;
   transition: all 0.4s;
 }
 
@@ -14,6 +14,10 @@
 
 .main-title:hover {
   border: none!important;
+}
+
+canvas {
+  position: absolute;
 }
 
 .hidden {
@@ -47,9 +51,17 @@
   border-bottom: none!important;
 }
 
+.fixed-t {
+  position: fixed;
+  top: 0;
+  right: 0;
+    /* left: 0; */
+  z-index: 3;
+}
+
 .vertical-nav {
-  min-width: 15rem;
-  width: 15rem;
+  min-width: 13rem;
+  width: 15%;
   height: 100vh;
   position: fixed;
   top: 0;
@@ -57,6 +69,7 @@
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
   transition: all 0.4s;
   background-color: #282C34;
+  z-index: 4;
 }
 
 .vertical-n {
@@ -77,42 +90,50 @@
   width: 100%;
 }
 
-#particles-js {
-  position: absolute;
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
 
-#particles-js > a {
-  position: relative;
-  top: 17em;
+#particles-js {
+  position: none!important;
+}
+
+#particles-js > img {
+  margin-top: 50px;
+  height: 190px;
+  margin-bottom: 40px;
+}
+
+.center > a {
+  flex-shrink: 0;
   text-align: center;
-  left: 32%;
   color: #61DAFB!important;
   font-size: 16px;
+  width: 40%;
+  background-color: #282C34;
+  height: 35px;
+  border: 1px solid white;
+  z-index: 2;
 }
 
-#particles-js > a:hover {
+.center > a:hover {
   text-decoration: none;
   opacity: 0.7;
   border: 1px solid white!important;
 }
 
-.login-btn {
-  width: 40%;
-  margin: 0 auto;
-  background-color: #282C34;
-  height: 20px;
-  border: 1px solid white;
-}
 
 .register {
-  position: relative;
-  top: 20em;
-  text-align: center;
-  left: 0;
+  width: 100%;
   color: white!important;
   font-size: 14px;
   background-color: #282C34;
   border: 1px solid #282C34;
+  text-align: center;
+  z-index: 2;
 }
 
 .register > a {
@@ -120,10 +141,17 @@
   color: white;
 }
 
+
 .adjusted-width {
-  width: calc(100% - 15rem);
-  margin-left: 15rem;
+  width: 100%;
   transition: all 0.4s;
+  min-width: 700px;
+}
+
+#spacer {
+  height: 82px;
+  width: 15%;
+  min-width: 13rem;
 }
 
 .adjusted-w {
