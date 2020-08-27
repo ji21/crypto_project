@@ -9,7 +9,16 @@
   font-size: 30px;
   text-align: center;
   margin: auto;
-  width: 100%;
+}
+
+#back-to-home {
+  z-index: 2;
+  opacity: 1;
+  text-align: start!important;
+  margin: 0 0 0 3rem!important;
+}
+
+#back-to-home:hover {
 }
 
 .main-title:hover {
@@ -99,6 +108,8 @@ canvas {
 
 #particles-js {
   position: none!important;
+  width: 100%;
+  height: auto;
 }
 
 #particles-js > img {
