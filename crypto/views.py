@@ -1,7 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from coinbase.wallet.client import Client
-from django.http import JsonResponse
 from django.views import View
 import json
 import os
@@ -15,10 +14,11 @@ environ.Env.read_env()
 print(os.environ.get('API_KEY'))
 
 
-def home_view(request):
+class HomeView(View):
   # url = "https://blockchain.info/ticker"
   # ex_rate = json.loads(requests.get(url))
-  return render(request, 'crypto/home.html')
+  def get(self, request):
+    return render(request, 'crypto/home.html')
 
 #how do i use get spot() to render it onto home.html??
 

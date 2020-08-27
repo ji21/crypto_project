@@ -17,7 +17,7 @@
       <a class="navbar-brand mt-3 pl-3 pr-3 pt-4 pb-2 main-title" style="width: 100%;" href="">Byte</a>
       <div id="particles-js" class="center">
           <img src="{% static 'images/letter-b.png' %}" alt="">
-          <a class="login-btn pt-2 pb-2 pl-4 pr-4 radius">Login</a>
+          <a href="{% url 'login' %}" class="login-btn pt-2 pb-2 pl-4 pr-4 radius">Login</a>
           <div class="register pr-3 pt-2 pl-3 pb-3">Don't have an account? <a href="{% url 'register' %}">Sign up.</a></div>
       </div>
     </div>

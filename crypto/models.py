@@ -2,8 +2,9 @@ from django.db import models
 from django.utils import timezone
 # Create your models here.
 class User(models.Model):
-  first_name = models.CharField(max_length=20)
-  last_name = models.CharField(max_length=20)
+  full_name = models.CharField(max_length=20)
+  user_name = models.CharField(max_length=20)
+  phone = models.CharField(max_length=20, blank=True, null=True)
   # transaction = models.ForeignKey(Transaction, on_delete=model.CASCADE)
   email = models.EmailField(max_length=40)
   # phone = PhoneNumberField(null=False, blank=False, unique=True)

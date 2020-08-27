@@ -4,11 +4,71 @@
   transition: all 0.4s;
 }
 
+.form-div {
+  min-width: 700px;
+  margin: 200px auto!important;
+  width: 50%;
+  display: flex;
+}
+
+p > .login {
+  color: #61DAFB;
+  border: none!important;
+}
+
+p > .login:hover {
+  border: none!important;
+}
+
+
+.form-div > img {
+  height: 100%;
+  border: 1px solid black;
+  width: 40%;
+}
+
+.form-btn {
+  height: 40px;
+  background-color: #282C34;
+  color: #61DAFB;
+  border: none;
+}
+
+.form-btn:hover {
+  background-color: #282C34;
+  color: #61DAFB;
+}
+
+input {
+  border-right: none!important;
+  border-top: none!important;
+  border-left: none!important;
+  color: #282C34;
+}
+
+label {
+  color: rgba(0, 0, 0, 0.6);!important;
+}
+
 .main-title {
   color: #61DAFB!important;
   font-size: 30px;
   text-align: center;
   margin: auto;
+}
+
+#sign-up-form {
+  width: 30%;
+  height: 50vh;
+  min-width: 500px;
+}
+
+.row {
+  margin-bottom: 1rem;
+}
+
+label {
+  font-size: 16px;
 }
 
 #back-to-home {
