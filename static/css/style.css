@@ -121,7 +121,7 @@ canvas {
 
 .center > a:hover {
   text-decoration: none;
-  opacity: 0.7;
+  opacity: 1;
   border: 1px solid white!important;
 }
 
@@ -134,11 +134,13 @@ canvas {
   border: 1px solid #282C34;
   text-align: center;
   z-index: 2;
+  opacity: 0.7;
 }
 
 .register > a {
   border: 1px solid #282C34;
   color: white;
+  opacity: 1!important;
 }
 
 
