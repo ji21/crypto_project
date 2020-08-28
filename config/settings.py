@@ -21,7 +21,7 @@ environ.Env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
-
+from django.contrib import messages
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
@@ -35,6 +35,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_PROFILE_MODULE = 'authentication.Profile'
 
 # Application definition
 
@@ -148,4 +149,11 @@ STATIC_URL = '/static/'
 # STATICFILES_DIRS = ( os.path.join('static'), )
 
 # print(STATICFILES_DIRS)
+
+
+MESSAGE_TAGS={
+  messages.ERROR : 'danger'
+}
+
+
 

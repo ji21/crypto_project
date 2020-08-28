@@ -5,6 +5,8 @@ const passwordField = document.querySelector("#password")
 const confirmField = document.querySelector("#confirm")
 const emailField = document.querySelector("#email")
 const toggle = document.querySelector("#toggle")
+const submit = document.querySelector("#submit")
+const form = document.querySelector("form")
 
 
 
@@ -164,11 +166,32 @@ const togglePw = (element) => {
   }
 }
 
+const submitForm = () => {
+  submit.setAttribute("disabled", "true")
+}
 
 
 
+form.addEventListener("submit", (event)=> {
+})
 toggle.addEventListener("click", ()=> togglePw(toggle))
 passwordField.addEventListener("keyup", (event)=>validatePassword(event.target.value, passwordField))
 userNameField.addEventListener("keyup", (event)=> validateUsername(event.target.value, userNameField))
 emailField.addEventListener("keyup", (event)=>validateEmail(event.target.value, emailField))
 confirmField.addEventListener("keyup", (event)=> confirmPassword(event.target.value, confirmField))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
