@@ -289,6 +289,12 @@ input[type=number]:focus,
   cursor: pointer;
 }
 
+.alert-success {
+  background-color:  #3BE2AB!important;
+  opacity: 0.7;
+  color: rgba(18, 80, 77, 1)!important;
+}
+
 
 /*css to overwrite boostrap loading animation*/
 /*.spin {
