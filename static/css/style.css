@@ -281,9 +281,21 @@ input[type=number]:focus,
   box-shadow: inset 0 -1px 0 white;
 }
 
+.hide {
+  display: none!important;
+}
+
+.toggle:hover {
+  cursor: pointer;
+}
 
 
-
+/*css to overwrite boostrap loading animation*/
+/*.spin {
+  animation: spinner-border .99s linear infinite!important;
+  border: .25em solid rgba(0, 0, 0, 0.6)!important;
+}
+*/
 
 
 
