@@ -23,7 +23,7 @@ const validateUsername = (value, element) => {
       method: "POST",
     }).then(res=> res.json()).then(data=> {
       load.classList.add('hide')
-      // console.log("data", data.username_error)
+      console.log("data", data)
       if (data.username_error) {
         element.classList.remove("valid")
         element.classList.add("is-invalid")
@@ -137,7 +137,7 @@ const validateEmail = (value, element) => {
     res.json()
     // load.classList.add('hide')
   ).then(data=> {
-    // console.log(data)
+    console.log(data)
     load.classList.add('hide')
     if (data.email_error) {
       errorMsg.style.display = "block"
