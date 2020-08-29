@@ -14,7 +14,11 @@ const validateUsername = (value, element) => {
   // console.log(value.length)
   const load = document.querySelector('#username-load')
   const errorMsg = document.querySelector('#username-feedback')
+  const submit = document.querySelector("#submit")
+  console.log(value.length)
   if (value.length > 0) {
+    console.log(submit)
+    submit.removeAttribute("disabled")
     // console.log(load.classList)
     load.classList.remove('hide')
     // console.log(load.classList)
@@ -36,6 +40,7 @@ const validateUsername = (value, element) => {
       }
     });
   } else {
+    submit.setAttribute("disabled", "true")
     element.classList.remove("is-invalid", "valid")
     errorMsg.style.display = "none";
   };
@@ -56,7 +61,6 @@ const validatePassword = (value, element) => {
     confirm.placeholder = "Please fill out password above"
     confirm.classList.remove("is-invalid", "valid")
     confirmFeedback.style.display = "none"
-    confirm.setAttribute("disabled", "true")
   } else if (value.length < 7) {
     element.classList.remove("valid")
     element.classList.add("is-invalid")
@@ -66,9 +70,6 @@ const validatePassword = (value, element) => {
     confirm.placeholder = "Please fill out password above"
     confirm.classList.remove("is-invalid", "valid")
     confirmFeedback.style.display = "none"
-    confirm.setAttribute("disabled", "true")
-    // confirmFeedback.setAttribute()
-
   } else {
     // console.log("value", value)
     // console.log("confirm.value", confirm.value)
@@ -85,7 +86,6 @@ const validatePassword = (value, element) => {
     element.classList.add("valid")
     errorMsg.style.display = "none"
     confirm.placeholder = ""
-    confirm.removeAttribute("disabled")
   }
 }
 
@@ -112,23 +112,9 @@ const confirmPassword = (value, element)=> {
 
 
 const validateEmail = (value, element) => {
+  const submit = document.querySelector("#submit")
   const errorMsg = document.querySelector("#email-feedback")
   const load = document.querySelector("#email-load")
-  // if (value.length === 0) {
-  //     errorMsg.style.display = "block"
-  //     errorMsg.innerText = "Please enter an email."
-  //     element.classList.add("is-invalid")
-  //     element.classList.remove("valid")
-  //     return 0
-  //   }
-  // // } else if (!vEmail(value)) {
-  // //     errorMsg.style.display = "block"
-  // //     errorMsg.innerText = `Please enter a valid email.`
-  // //     element.classList.add("is-invalid")
-  // //     element.classList.remove("valid")
-  // //     return 0
-  // // }
-  // console.log(load)
   load.classList.remove('hide')
   fetch("/authenticate/validate-email/", {
     body: JSON.stringify({email: value}),
@@ -140,11 +126,13 @@ const validateEmail = (value, element) => {
     console.log(data)
     load.classList.add('hide')
     if (data.email_error) {
+      submit.setAttribute("disabled", "true")
       errorMsg.style.display = "block"
       errorMsg.innerText = `${data.email_error}`
       element.classList.add("is-invalid")
       element.classList.remove("valid")
     } else {
+      submit.removeAttribute("disabled")
       errorMsg.style.display = "none"
       element.classList.remove("is-invalid")
       element.classList.add("valid")
@@ -165,11 +153,6 @@ const togglePw = (element) => {
     confirmField.type ="password"
   }
 }
-
-const submitForm = () => {
-  submit.setAttribute("disabled", "true")
-}
-
 
 
 form.addEventListener("submit", (event)=> {

@@ -17,25 +17,44 @@ class RegView(View):
     return render(request, 'authenticate/register.html')
 
   def post(self, request):
-
     username = request.POST['username']
     email = request.POST['email']
     full_name = request.POST['fullname']
     password = request.POST['password']
     phone = request.POST['phone']
+    confirm = request.POST['confirm']
 
-    if not User.objects.filter(username=username).exists():
-      if not User.objects.filter(email=email).exists():
+    if User.objects.filter(username=username).exists():
+      messages.error(request, 'Username has already been taken. Please choose another one.')
+      return render(request, 'authenticate/register.html')
+    else:
+      if email=="":
+        messages.error(request, 'Please fill in all required fields.')
+      elif User.objects.filter(email=email).exists():
+        messages.error(request, 'Email already in use. Please use another email.')
+      elif password=="":
+        messages.error(request, 'Please fill in all required fields.')
+      elif len(password) < 7:
+        messages.error(request, 'Your password must be at least six characters long.')
+      elif confirm=="":
+        messages.error(request, 'Please fill in all required fields.')
+      elif password!=confirm:
+        messages.error(request, 'Your passwords must match.')
+      else:
         user = User.objects.create_user(username=username, email=email)
         user.set_password(password)
         user.save()
         messages.success(request, 'Your account has been successfully created.')
-        return render(request, 'authenticate/register.html')
-      else:
-        messages.error(request, 'Email already in use. Please use another email.')
-    if User.objects.filter(username=username).exists():
-      messages.error(request, 'Username has already been taken. Please choose another one.')
-    return render(request, 'authenticate/register.html')
+      return render(request, 'authenticate/register.html')
+
+
+
+
+
+
+
+
+
 
 
 

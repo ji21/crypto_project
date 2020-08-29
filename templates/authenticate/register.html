@@ -47,11 +47,11 @@
         </div>
         <div class="form-group">
           <label for="confirm">Confirm Password</label>
-          <input type="password" class="form-control" id="confirm" disabled="true" placeholder="Please fill out password above">
+          <input type="password" class="form-control" id="confirm" name="confirm" placeholder="Please fill out password above">
           <p class="mt-2 mb-0 alert alert-danger" style="display: none; font-size: 12px; transition: all 0.2s" id="confirm-feedback"></p>
         </div>
         <div class="d-flex align-items-center mt-4">
-          <button type="submit" id="submit" class="btn form-btn">Create an account</button>
+          <button type="submit" id="submit" class="btn form-btn" disabled>Create an account</button>
           <p class="mt-0 mb-0 ml-3" style="font-size: 16px">Already a member? <a href="{% url 'login' %}" class="login">Login.</a></p>
         </div>
       </form>
