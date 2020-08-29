@@ -4,9 +4,9 @@
 {% block title %}Sign up{% endblock %}
 
 {% block content %}
-  <div class="form-div p-5 radius">
-    <img src="" alt="">
-    <div>
+  <div class="form-div pl-5 pt-5 pb-5 pr-5 radius">
+    <img src="{% static 'images/signup.png' %}" alt="">
+    <div id="#fixer" class="pr-3">
       {% csrf_token %}
       <h1 class="mb-3">Sign up to Start Trading.</h1>
       <p class="mb-5" style="font-size: 16px">Create your 100% free account and start trading with virtual money</p>
