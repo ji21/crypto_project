@@ -6,7 +6,7 @@
 
 .form-div {
   min-width: 1000px;
-  margin: 180px auto 0px auto!important;
+  margin: 150px auto 0px auto!important;
   width: 65%;
   display: flex;
   box-shadow: 0px 0px 17px 9px rgba(219,219,219,0.18);
@@ -39,14 +39,15 @@ p > .login:hover {
 
 .form-btn {
   height: 40px;
-  background-color: #282C34;
-  color: #61DAFB;
+  color: white;
+  background-color: #61DAFB;
   border: none;
 }
 
 .form-btn:hover {
-  background-color: #282C34;
-  color: #61DAFB;
+/*  color: #282C34;*/
+  color: white;
+/*  text-shadow: 1px 1px 0px #282C34;*/
 }
 
 input {

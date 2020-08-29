@@ -3,7 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.views import View
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.core.email import EmailMessage
+from django.core.mail import EmailMessage
 from validate_email import validate_email
 from .models import Profile
 import json
@@ -45,7 +45,6 @@ class RegView(View):
         user = User.objects.create_user(username=username, email=email)
         user.set_password(password)
         user.is_active = False
-        user.save()
         email = EmailMessage(
             'Hello',
             'Body goes here',
@@ -55,6 +54,7 @@ class RegView(View):
             reply_to=['another@example.com'],
             headers={'Message-ID': 'foo'},
         )
+        user.save()
         messages.success(request, 'Your account has been successfully created.')
       return render(request, 'authenticate/register.html')
 
