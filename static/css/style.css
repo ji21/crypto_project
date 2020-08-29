@@ -5,9 +5,9 @@
 }
 
 .form-div {
-  min-width: 1000px;
+  min-width: 1020px;
   margin: 150px auto 0px auto!important;
-  width: 65%;
+  width: 1020px;
   display: flex;
   box-shadow: 0px 0px 17px 9px rgba(219,219,219,0.18);
 }
@@ -31,10 +31,10 @@ p > .login:hover {
 
 .form-div > img {
   height: 100%;
-  width: 40%;
+  width: 400px;
   margin-top: auto;
   margin-bottom: auto;
-  min-width: 430px;
+  min-width: 400px;
 }
 
 .form-btn {
