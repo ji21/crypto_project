@@ -3,7 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.views import View
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage, send_mail
 from validate_email import validate_email
 from .models import Profile
 import json
@@ -31,8 +31,8 @@ class RegView(View):
     else:
       if email=="":
         messages.error(request, 'Please fill in all required fields.')
-      elif User.objects.filter(email=email).exists():
-        messages.error(request, 'Email already in use. Please use another email.')
+      # elif User.objects.filter(email=email).exists():
+      #   messages.error(request, 'Email already in use. Please use another email.')
       elif password=="":
         messages.error(request, 'Please fill in all required fields.')
       elif len(password) < 7:
@@ -45,17 +45,18 @@ class RegView(View):
         user = User.objects.create_user(username=username, email=email)
         user.set_password(password)
         user.is_active = False
-        email = EmailMessage(
-            'Hello',
-            'Body goes here',
-            'from@example.com',
-            ['to1@example.com', 'to2@example.com'],
-            ['bcc@example.com'],
-            reply_to=['another@example.com'],
-            headers={'Message-ID': 'foo'},
-        )
         user.save()
-        messages.success(request, 'Your account has been successfully created.')
+        email_subject = 'Activate your account.'
+        email_body = 'empty'
+        e = EmailMessage(
+            email_subject,
+            email_body,
+            'noreply4@testing.com',
+            [email],
+        )
+        e.send(fail_silently=False)
+        # send_mail(email_subject, email_body, 'jeffreyip54@gmail.com', [email], fail_silently=False)
+        messages.success(request, 'Your account has been successfully created. Please activate it through your email and login.')
       return render(request, 'authenticate/register.html')
 
 

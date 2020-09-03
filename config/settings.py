@@ -28,8 +28,8 @@ from django.contrib import messages
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = os.environ.get('SECRET_KEY')
 SECRET_KEY = env('SECRET_KEY')
-print(SECRET_KEY)
-print(os.environ.get('DB_NAME'))
+print("secret key" , SECRET_KEY)
+print("db name", os.environ.get('DB_NAME'))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -149,6 +149,16 @@ STATIC_URL = '/static/'
 # STATICFILES_DIRS = ( os.path.join('static'), )
 
 # print(STATICFILES_DIRS)
+
+#emails
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+# DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = 587
+
 
 
 MESSAGE_TAGS={
