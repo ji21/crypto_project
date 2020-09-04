@@ -144,8 +144,8 @@ canvas {
 }
 
 .vertical-nav {
-  min-width: 13rem;
-  width: 15%;
+  min-width: 15rem;
+  width: 20%;
   height: 100vh;
   position: fixed;
   top: 1rem;
@@ -199,13 +199,13 @@ canvas {
 .center > a {
   flex-shrink: 0;
   text-align: center;
-  color: #61DAFB!important;
-  font-size: 16px;
+  color: rgb(97, 104, 147)!important;
+  font-size: 18px;
   width: 40%;
-  background-color: #282C34;
   height: 35px;
   border: 1px solid white;
   z-index: 2;
+  font-weight: 700;
 }
 
 .center > a:hover {

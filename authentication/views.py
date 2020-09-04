@@ -2,11 +2,23 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views import View
 from django.contrib.auth.models import User
+from authentication.models import Profile
+
+#for email
 from django.contrib import messages
 from django.core.mail import EmailMessage, send_mail
 from validate_email import validate_email
-from .models import Profile
+
+#to do json.loads()
 import json
+
+#uid and token modules
+from django.urls import reverse
+from django.utils.encoding import force_bytes, force_text, DjangoUnicodeDecodeError
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.contrib.sites.shortcuts import get_current_site
+from .utils import token_generator
+
 # Create your views here.
 class LoginView(View):
   def get(self, request):
@@ -46,8 +58,20 @@ class RegView(View):
         user.set_password(password)
         user.is_active = False
         user.save()
+
+        #sending activation email
+
         email_subject = 'Activate your account.'
-        email_body = 'empty'
+
+        domain_name = get_current_site(request).domain
+        uid = urlsafe_base64_encode(force_bytes(user.pk))
+        token = token_generator.make_token(user)
+        link = reverse('activate', kwargs={'uid': uid, 'token': token})
+        activate_url = "http://" + domain_name + link
+
+
+        full_name = ' ' + full_name
+        email_body = f'Hello{full_name}, please click on the link below to activate your bytimise account.\n' + activate_url
         e = EmailMessage(
             email_subject,
             email_body,
@@ -60,8 +84,10 @@ class RegView(View):
       return render(request, 'authenticate/register.html')
 
 
-
-
+#encode uid and get token from ...
+class EmailVerficationView(View):
+  def get(self, request, uid, token):
+    return redirect('login')
 
 
 
