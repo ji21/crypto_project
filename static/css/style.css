@@ -4,6 +4,10 @@
   transition: all 0.4s;
 }
 
+body {
+  background-color: rgba(251, 252, 254);
+}
+
 .form-div {
   min-width: 1240px;
   margin: 150px auto 0px auto!important;
@@ -144,12 +148,14 @@ canvas {
   width: 15%;
   height: 100vh;
   position: fixed;
-  top: 0;
-  left: 0;
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+  top: 1rem;
+  left: 1rem;
+  box-shadow: 3px 3px 100px rgba(240, 243, 248);
   transition: all 0.4s;
-  background-color: #282C34;
+  background-color: rgb(255,255,255);
   z-index: 4;
+  border-top-right-radius: 3rem;
+  border-top-left-radius: 3rem;
 }
 
 .vertical-n {
@@ -181,9 +187,10 @@ canvas {
   position: none!important;
   width: 100%;
   height: auto;
+  background-color: rgb(255,255,255)!important;
 }
 
-#particles-js > img {
+.center > img {
   margin-top: 50px;
   height: 190px;
   margin-bottom: 40px;
@@ -210,18 +217,15 @@ canvas {
 
 .register {
   width: 100%;
-  color: white!important;
+  color: rgb(97, 104, 147)!important;
   font-size: 14px;
-  background-color: #282C34;
-  border: 1px solid #282C34;
   text-align: center;
   z-index: 2;
   opacity: 0.7;
 }
 
 .register > a {
-  border: 1px solid #282C34;
-  color: white;
+  color: rgb(97, 104, 147)!important;
   opacity: 1!important;
 }
 
@@ -244,11 +248,7 @@ canvas {
   transition: all 0.4s;
 }
 
-a:hover {
-  border-left: 1px solid #282C34!important;
-  border-right: 1px solid #282C34!important;
-  border-top: 1px solid #282C34!important;
-}
+
 
 .radius {
   border-radius: 1rem;
