@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.views import View
 from django.contrib.auth.models import User
@@ -66,6 +66,10 @@ class RegView(View):
         domain_name = get_current_site(request).domain
         uid = urlsafe_base64_encode(force_bytes(user.pk))
         token = token_generator.make_token(user)
+
+        #return reverse()... can be used to render a new page with a dynamic id,
+        #but in our case we used it to generate a dynamic string instead
+
         link = reverse('activate', kwargs={'uid': uid, 'token': token})
         activate_url = "http://" + domain_name + link
 
@@ -89,8 +93,12 @@ class EmailVerficationView(View):
     try:
       id = force_text(urlsafe_base64_decode(uid))
       user=User.objects.get(pk=id)
-      if user.is_active:
+      if user.is_active or not token_generator.check_token(user, token):
         return redirect('error')
+      user.is_active = True
+      user.save()
+      messages.success(request, 'Your account has been successfully activated.')
+      return redirect('login')
     except Exception as ex:
       pass
     return redirect('login')
