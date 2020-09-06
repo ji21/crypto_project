@@ -131,7 +131,7 @@ label {
 
 .main-title {
   color: rgb(45, 96, 255)!important;
-  font-size: 30px;
+  font-size: 34px;
   text-align: left;
   margin-left: 10%;
   width: 15rem;
@@ -233,6 +233,7 @@ canvas {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  justify-content: space-around;
 }
 
 #particles-js {
