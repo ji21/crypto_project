@@ -21,7 +21,7 @@ from .utils import token_generator
 
 # Create your views here.
 class LoginView(View):
-  def get(self, request):
+  def get(self, request, uid, token):
     return render(request, 'authenticate/login.html')
 
 
@@ -70,8 +70,7 @@ class RegView(View):
         activate_url = "http://" + domain_name + link
 
 
-        full_name = ' ' + full_name
-        email_body = f'Hello{full_name}, please click on the link below to activate your bytimise account.\n' + activate_url
+        email_body = f'Hello {full_name}, please click on the link below to activate your bytimise account.\n' + activate_url
         e = EmailMessage(
             email_subject,
             email_body,
@@ -87,6 +86,13 @@ class RegView(View):
 #encode uid and get token from ...
 class EmailVerficationView(View):
   def get(self, request, uid, token):
+    try:
+      id = force_text(urlsafe_base64_decode(uid))
+      user=User.objects.get(pk=id)
+      if user.is_active:
+        return redirect('error')
+    except Exception as ex:
+      pass
     return redirect('login')
 
 
