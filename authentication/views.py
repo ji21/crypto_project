@@ -21,7 +21,7 @@ from .utils import token_generator
 
 # Create your views here.
 class LoginView(View):
-  def get(self, request, uid, token):
+  def get(self, request):
     return render(request, 'authenticate/login.html')
 
 
@@ -93,20 +93,20 @@ class EmailVerficationView(View):
     try:
       id = force_text(urlsafe_base64_decode(uid))
       user=User.objects.get(pk=id)
-      if user.is_active or not token_generator.check_token(user, token):
-        return redirect('error')
+      email = user.email
+      if not token_generator.check_token(user, token):
+        messages.error(request, 'Your token has expired. Please enter your email below to resend an activation code.')
+        return render(request, 'authenticate/error.html')
+      elif user.is_active:
+        messages.success('Your account is already activated. Please log in.')
+        return render(request, 'login')
       user.is_active = True
       user.save()
       messages.success(request, 'Your account has been successfully activated.')
       return redirect('login')
     except Exception as ex:
       pass
-    return redirect('login')
-
-
-
-
-
+    return redirect('register')
 
 
 

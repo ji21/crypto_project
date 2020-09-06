@@ -8,5 +8,5 @@ urlpatterns = [
   path('validate-username/', csrf_exempt(UserValidView.as_view()), name="validate-username"),
   path('validate-email/', csrf_exempt(EmailValidView.as_view()), name="validate-email"),
   path('activate/<uid>/<token>', EmailVerficationView.as_view(), name="activate"),
-  path('error/', EmailVerficationView.as_view(), name="error")
+  path('error/<uid>/<token>', EmailVerficationView.as_view(), name="error")
 ]
