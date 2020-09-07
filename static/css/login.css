@@ -1,9 +1,26 @@
 .login-form-div {
   display: flex;
   flex-direction: column;
-  margin: 10rem auto 15% auto;
+  margin: auto;
   padding: 0;
   align-items: center;
-  min-width: 500px;
-  width: 50%;
+  min-width: 450px;
+  width: 450px;
+  border-radius: 1rem;
+  box-shadow: 3px 3px 20px rgba(235, 238, 243);
+}
+
+.messages {
+  width: 100%;
+}
+
+form {
+  width: 100%!important;
+}
+
+.login-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  margin: auto;
 }

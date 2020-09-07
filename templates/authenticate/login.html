@@ -8,24 +8,27 @@
 
 
 {% block content %}
-  <div class="login-form-div">
-    {% include '../helpers/messages.html/' %}
-    <form>
-      <div class="form-group">
-        <label for="signin-mail">Email</label>
-        <input type="signin-email" class="form-control" id="signin-email" name="signin-email" placeholder="Your email">
-        <p class="mt-2 mb-0 alert alert-danger" style="display: none; font-size: 12px; transition: all 0.2s" id="confirm-feedback"></p>
-      </div>
-      <div class="form-group">
-        <label for="signin-password" class="d-flex">Password <div class="toggle ml-1" id="signin-toggle">(show)</div></label>
-        <input type="password" class="form-control" name="signin-password" id="signin-password" placeholder="6+ characters">
-        <p class="mt-2 mb-0 alert alert-danger" style="display: none; font-size: 12px; transition: all 0.2s" id="password-feedback"></p>
-      </div>
-      <div class="d-flex align-items-center mt-4">
-        <button type="submit" id="submit" class="btn form-btn">Sign In</button>
-        <p class="mt-0 mb-0 ml-3" style="font-size: 16px; color: rgba(0, 0, 0, 0.6)"><a href="{% url 'reset' %}" class="login">Forgot your password?</a></p>
-      </div>
-    </form>
+  <div class="login-container">
+    <div class="login-form-div p-5">
+      {% include '../helpers/messages.html/' %}
+      <form method="POST" action="{% url 'login' %}">
+      {% csrf_token %}
+        <div class="form-group">
+          <label for="signin-mail">Username</label>
+          <input type="signin-email" class="form-control" id="signin-email" name="username" placeholder="Your username">
+          <p class="mt-2 mb-0 alert alert-danger" style="display: none; font-size: 12px;" id="confirm-feedback"></p>
+        </div>
+        <div class="form-group">
+          <label for="signin-password" class="d-flex">Password <div class="toggle ml-1" id="signin-toggle">(show)</div></label>
+          <input type="password" class="form-control" name="signin-password" id="signin-password" placeholder="6+ characters">
+          <p class="mt-2 mb-0 alert alert-danger" style="display: none; font-size: 12px; transition: all 0.2s" id="password-feedback"></p>
+        </div>
+        <div class="d-flex align-items-center mt-4">
+          <button type="submit" id="submit" class="btn form-btn">Sign In</button>
+          <p class="mt-0 mb-0 ml-3" style="font-size: 16px; color: rgba(0, 0, 0, 0.6)"><a href="{% url 'reset' %}" class="login">Forgot your password?</a></p>
+        </div>
+      </form>
+    </div>
   </div>
 {% endblock %}
 
