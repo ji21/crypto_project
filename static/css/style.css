@@ -25,7 +25,7 @@
 }
 
 body {
-  background-color: rgba(251, 252, 254);
+  background-color: rgb(255, 255, 255)
   position: fixed;
   width: 100%;
   height: 100vh;
@@ -54,18 +54,19 @@ body {
   height: 300px;
 }
 
-.form-wrapper {
+/*.form-wrapper {
   height: 100%;
   width: 100%;
   display: flex;
+  margin: auto;
 }
 
 .form-wrapper > img {
   height: 100%;
   border: 1px solid black;
-  min-width: 1000px;
+  min-width: 600px;
   margin: 0 auto;
-}
+}*/
 
 
 .home-font {
@@ -80,14 +81,24 @@ body {
   text-align: start;
 }
 
-.form-div {
+/*.form-div {
   display: flex;
   flex-direction: column;
   margin: auto;
   padding: 0;
   align-items: center;
   min-width: 500px;
-}
+}*/
+
+/*.login-form-div {
+  display: flex;
+  flex-direction: column;
+  margin: 10rem auto 15% auto;
+  padding: 0;
+  align-items: center;
+  min-width: 500px;
+  width: 50%;
+}*/
 
 #list {
   color: rgb(80, 88, 135)!important;
@@ -152,14 +163,6 @@ label {
   color: rgba(0, 0, 0, 0.6);!important;
 }
 
-.main-title {
-  color: rgb(45, 96, 255)!important;
-  font-size: 34px;
-  text-align: left;
-  margin-left: 10%;
-  width: 15rem;
-}
-
 #sign-up-form {
   width: 500px;
 }
@@ -172,22 +175,16 @@ label {
   font-size: 16px;
 }
 
-#back-to-home {
-  z-index: 2;
-  opacity: 1;
-  text-align: start!important;
-  margin: 0 0 0 3rem!important;
-}
-
-#back-to-home:hover {
+.main-title {
+  color: rgb(45, 96, 255)!important;
+  font-size: 34px;
+  text-align: left;
+  margin-left: 10%;
+  width: 15rem;
 }
 
 .main-title:hover {
   border: none!important;
-}
-
-canvas {
-  position: absolute;
 }
 
 .hidden {
@@ -311,14 +308,6 @@ canvas {
 
 
 
-.adjusted-w {
-  width: calc(100% - 8rem);
-  margin-left: 8rem;
-  transition: all 0.4s;
-}
-
-
-
 .radius {
   border-radius: 1rem;
 }
@@ -339,9 +328,6 @@ canvas {
   border-top-left-radius: .25rem;
 }
 /*
-particle js css*/
-body{ margin:0; font:normal 75% Arial, Helvetica, sans-serif; } canvas{ display: block; vertical-align: bottom; } /* ---- particles.js container ---- */ #particles-js{ position:absolute; width: 100%; height: 100%; background-color: #282c34; background-image: url(""); background-repeat: no-repeat; background-size: cover; background-position: 50% 50%; } /* ---- stats.js ---- */ .count-particles{ background: #000022; position: absolute; top: 48px; left: 0; width: 80px; color: #13E8E9; font-size: .8em; text-align: left; text-indent: 4px; line-height: 14px; padding-bottom: 2px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; } .js-count-particles{ font-size: 1.1em; } #stats, .count-particles{ -webkit-user-select: none; margin-top: 5px; margin-left: 5px; } #stats{ border-radius: 3px 3px 0 0; overflow: hidden; } .count-particles{ border-radius: 0 0 3px 3px; }
-
 /*css to remove boostrap form outline*/
 textarea:focus,
 textarea.form-control:focus,

@@ -2,10 +2,13 @@
 {% load static %}
 
 {% block title %}Sign up{% endblock %}
+{% block stylesheet %}
+  <link rel="stylesheet" href="{% static 'css/register.css' %}">
+{% endblock %}
 
 {% block content %}
   <div class="form-wrapper row">
-    <div class="form-div p-5 col-lg-4 col-xs-12">
+    <div class="form-div p-5 col-lg-7 col-xs-12">
       <h1 class="mb-3" style="width: 500px; text-align: left">Sign up to Start Trading.</h1>
       <p class="mb-5" style="font-size: 16px; width: 500px; text-align: left">Create your 100% free account and start trading with virtual money</p>
       {% include '../helpers/messages.html/' %}
@@ -55,7 +58,13 @@
         </div>
       </form>
     </div>
-    <img src="https://img.lovepik.com/element_origin_pic/18/10/16/79f2ff327190388cb2ecba8c070b8d2c.png_wh860.png" class="col-lg-7 d-lg-block d-none"/>
+    <img src="https://img.lovepik.com/element_origin_pic/18/10/16/79f2ff327190388cb2ecba8c070b8d2c.png_wh860.png" class="col-lg-3 d-lg-block d-none"/>
   </div>
-  <script src="{% static 'js/auth.js' %}"></script>
 {% endblock %}
+
+
+{% block scripts %}
+  <script src="{% static 'js/register.js' %}"></script>
+{% endblock %}
+
+

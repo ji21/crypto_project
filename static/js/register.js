@@ -139,14 +139,15 @@ const validateEmail = (value, element) => {
 
 
 
-const togglePw = (element) => {
+const togglePw = (element, e) => {
+  console.log(e)
   if (element.innerText === "(show)") {
     element.innerText = "(hide)"
-    passwordField.type = "text"
+    e.type = "text"
     confirmField.type ="text"
   } else {
     element.innerText = "(show)"
-    passwordField.type = "password"
+    e.type = "password"
     confirmField.type ="password"
   }
 }
@@ -154,7 +155,7 @@ const togglePw = (element) => {
 
 form.addEventListener("submit", (event)=> {
 })
-toggle.addEventListener("click", ()=> togglePw(toggle))
+toggle.addEventListener("click", ()=> togglePw(toggle, passwordField))
 passwordField.addEventListener("keyup", (event)=>validatePassword(event.target.value, passwordField))
 userNameField.addEventListener("keyup", (event)=> validateUsername(event.target.value, userNameField))
 emailField.addEventListener("keyup", (event)=>validateEmail(event.target.value, emailField))

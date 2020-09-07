@@ -1,0 +1,9 @@
+.login-form-div {
+  display: flex;
+  flex-direction: column;
+  margin: 10rem auto 15% auto;
+  padding: 0;
+  align-items: center;
+  min-width: 500px;
+  width: 50%;
+}

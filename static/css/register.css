@@ -1,0 +1,28 @@
+.form-wrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  margin: auto;
+}
+
+.form-wrapper > img {
+  height: 100%;
+  border: 1px solid black;
+  min-width: 600px;
+  margin: 0 auto;
+}
+
+.form-div {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  padding: 0;
+  align-items: center;
+  min-width: 500px;
+}
+
+@media only screen and (max-width: 1470px) {
+  .form-wrapper > img {
+    display: none!important;
+  }
+}
