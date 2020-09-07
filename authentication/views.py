@@ -32,10 +32,11 @@ class RegView(View):
   def post(self, request):
     username = request.POST['username']
     email = request.POST['email']
-    full_name = request.POST['fullname']
+    preferred_name = request.POST.get('preferred_name', False)
     password = request.POST['password']
     phone = request.POST['phone']
     confirm = request.POST['confirm']
+
 
     if User.objects.filter(username=username).exists():
       messages.error(request, 'Username has already been taken. Please choose another one.')
@@ -43,8 +44,10 @@ class RegView(View):
     else:
       if email=="":
         messages.error(request, 'Please fill in all required fields.')
-      # elif User.objects.filter(email=email).exists():
-      #   messages.error(request, 'Email already in use. Please use another email.')
+      elif User.objects.filter(email=email).exists():
+        messages.error(request, 'Email already in use. Please use another email.')
+      elif preferred_name=="":
+        messages.error(request, 'Please fill in all required fields.')
       elif password=="":
         messages.error(request, 'Please fill in all required fields.')
       elif len(password) < 7:
@@ -55,7 +58,7 @@ class RegView(View):
         messages.error(request, 'Your passwords must match.')
       else:
         user = User.objects.create_user(username=username, email=email)
-        profile = Profile(user=user, full_name=full_name, phone=phone)
+        profile = Profile(user=user, preferred_name=preferred_name, phone=phone)
         profile.save()
         user.set_password(password)
         user.is_active = False
@@ -76,7 +79,7 @@ class RegView(View):
         activate_url = "http://" + domain_name + link
 
 
-        email_body = f'Hello {full_name}, please click on the link below to activate your bytimise account.\n' + activate_url
+        email_body = f'Hello {preferred_name}, please click on the link below to activate your bytimise account.\n' + activate_url
         e = EmailMessage(
             email_subject,
             email_body,
@@ -85,7 +88,7 @@ class RegView(View):
         )
         e.send(fail_silently=False)
         # send_mail(email_subject, email_body, 'jeffreyip54@gmail.com', [email], fail_silently=False)
-        messages.success(request, 'Your account has been successfully created. Please activate it through your email and login.')
+        messages.success(request, 'Your account has been successfully created. Please activate it through your email before loggin.')
       return render(request, 'authenticate/register.html')
 
 

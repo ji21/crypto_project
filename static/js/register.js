@@ -1,4 +1,4 @@
-
+const prefName = document.querySelector("#preferred-name")
 const userNameField = document.querySelector('#username')
 const passwordField = document.querySelector("#password")
 const confirmField = document.querySelector("#confirm")
@@ -153,6 +153,21 @@ const togglePw = (element, e) => {
 }
 
 
+const toggleName = (element, value) => {
+  const errorMsg = document.querySelector("#name-feedback")
+  if (value==="") {
+    element.classList.remove("valid")
+    element.classList.add("is-invalid")
+    errorMsg.innerText = "Please enter your preferred name."
+    errorMsg.style.display = "block"
+  } else {
+    element.classList.add("valid")
+    element.classList.remove("is-invalid")
+    errorMsg.style.display = "none"
+  }
+}
+
+
 form.addEventListener("submit", (event)=> {
 })
 toggle.addEventListener("click", ()=> togglePw(toggle, passwordField))
@@ -160,3 +175,4 @@ passwordField.addEventListener("keyup", (event)=>validatePassword(event.target.v
 userNameField.addEventListener("keyup", (event)=> validateUsername(event.target.value, userNameField))
 emailField.addEventListener("keyup", (event)=>validateEmail(event.target.value, emailField))
 confirmField.addEventListener("keyup", (event)=> confirmPassword(event.target.value, confirmField))
+prefName.addEventListener("keyup", (event)=> toggleName(prefName, event.target.value))
