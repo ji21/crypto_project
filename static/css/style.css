@@ -86,7 +86,7 @@ body {
   margin: auto;
   padding: 0;
   align-items: center;
-  width: 500px;
+  min-width: 500px;
 }
 
 #list {
@@ -161,7 +161,7 @@ label {
 }
 
 #sign-up-form {
-  width: 100%;
+  width: 500px;
 }
 
 .row {
