@@ -6,10 +6,11 @@
 }
 
 .form-wrapper > img {
-  height: 100%;
-  border: 1px solid black;
+  height: 50%;
+/*  border: 1px solid black;*/
   min-width: 600px;
-  margin: 0 auto;
+  margin: auto auto auto auto;
+  background-color: rgb(255, 234, 244);
 }
 
 .form-div {

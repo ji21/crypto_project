@@ -55,6 +55,8 @@ class RegView(View):
         messages.error(request, 'Your passwords must match.')
       else:
         user = User.objects.create_user(username=username, email=email)
+        profile = Profile(user=user, full_name=full_name, phone=phone)
+        profile.save()
         user.set_password(password)
         user.is_active = False
         user.save()
@@ -132,3 +134,17 @@ class EmailValidView(View):
     elif validate_email(email):
       return JsonResponse({'email_valid': True})
     return JsonResponse({'email_error': 'Email format is invalid.'}, status=400)
+
+
+
+class ResetView(View):
+  def get(self, request):
+    return render(request, 'authenticate/reset_pw.html')
+
+
+
+
+
+
+
+

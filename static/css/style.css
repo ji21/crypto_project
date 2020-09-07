@@ -116,7 +116,7 @@ body {
 }
 
 p > .login {
-  color: #61DAFB;
+  color: rgb(45, 96, 255);
   border: none!important;
 }
 
@@ -142,7 +142,7 @@ p > .login:hover {
 
 .form-btn {
   color: white;
-  background-color: #61DAFB;
+  background-color: rgb(45, 96, 255);
   border: none;
 }
 
