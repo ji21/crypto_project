@@ -4,11 +4,10 @@
 {% block title %}Sign up{% endblock %}
 
 {% block content %}
-  <div class="form-div pl-5 pt-5 pb-5 pr-5 radius">
-    <img src="{% static 'images/signup.png' %}" style="margin-right: 1rem; margin-left: -1rem" alt="">
-    <div id="#fixer" class="pr-3" style="margin-right: auto; margin-left: auto">
-      <h1 class="mb-3">Sign up to Start Trading.</h1>
-      <p class="mb-5" style="font-size: 16px">Create your 100% free account and start trading with virtual money</p>
+  <div class="form-wrapper row">
+    <div class="form-div p-5 col-lg-4 col-xs-12">
+      <h1 class="mb-3" style="width: 100%; text-align: left">Sign up to Start Trading.</h1>
+      <p class="mb-5" style="font-size: 16px; width: 100%; text-align: left">Create your 100% free account and start trading with virtual money</p>
       {% include '../helpers/messages.html/' %}
       <form action="{% url 'register' %}" id="sign-up-form" method="POST">
       {% csrf_token %}
@@ -56,6 +55,7 @@
         </div>
       </form>
     </div>
+    <img src="" class="col-lg-7 col-xs-12"/>
   </div>
   <script src="{% static 'js/auth.js' %}"></script>
 {% endblock %}

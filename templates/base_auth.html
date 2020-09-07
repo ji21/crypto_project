@@ -12,11 +12,7 @@
 
 
   <body>
-    <div class="conatiner">
-    <nav class="navbar navbar-expand-lg navbar-dark pb-3 pl-0 pt-3 fixed-top" id="navbar" style="background-color: #282C34!important">
-      <div id="particles-js"></div>
-      <a class="navbar-brand mt-3 pl-3 pr-3 pt-4 pb-3 main-title" id="back-to-home" style="z-index: 2" href="{% url 'home' %}">Back to home</a>
-    </nav>
+    <div class="container-fluid">
       {% block content %}{% endblock %}
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
