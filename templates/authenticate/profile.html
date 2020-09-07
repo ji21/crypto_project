@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  {% if request.user.is_authenticated %}
+    <div id="content" class="adjusted-width">
+      <form method="POST" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button class="btn btn-primary">Log Out</button>
+      </form>
+    </div>
+  {% else %}
+    <div>hehe</div>
+  {% endif %}
+{% endblock %}

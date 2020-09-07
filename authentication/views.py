@@ -19,8 +19,8 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.sites.shortcuts import get_current_site
 from .utils import token_generator
 
-
 from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 class LoginView(View):
   def get(self, request):
@@ -37,7 +37,7 @@ class LoginView(View):
         if user and boo:
           if user.is_active:
             auth.login(request, user)
-            messages.success(request, f'Hello {user.profile.preferred_name}, welcome to bytimise.')
+            # messages.success(request, f'Hello {user.profile.preferred_name}, welcome to bytimise.')
             return redirect('home')
           else:
             messages.error(request, 'Please activate your account through email before logging in.')
@@ -162,13 +162,18 @@ class EmailValidView(View):
       return JsonResponse({'email_valid': True})
     return JsonResponse({'email_error': 'Email format is invalid.'}, status=400)
 
-
+@login_required(login_url='/home/')
+def profile(request):
+  return render(request, 'authenticate/profile.html')
 
 class ResetView(View):
   def get(self, request):
     return render(request, 'authenticate/reset_pw.html')
 
-
+class LogoutView(View):
+  def post(self, request):
+    auth.logout(request)
+    return redirect('home')
 
 
 
