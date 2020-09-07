@@ -12,7 +12,8 @@
 
 
   <body>
-    <div class="container-fluid">
+    <div class="container-fluid" style="background-color: rgb(255, 255, 255)">
+      <a href="{% url 'home' %}" id="back">Back</a>
       {% block content %}{% endblock %}
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

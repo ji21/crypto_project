@@ -63,6 +63,8 @@ body {
 .form-wrapper > img {
   height: 100%;
   border: 1px solid black;
+  min-width: 1000px;
+  margin: 0 auto;
 }
 
 
@@ -109,6 +111,13 @@ p > .login {
 
 p > .login:hover {
   border: none!important;
+}
+
+#back {
+  position: fixed;
+  top: 3%;
+  left: 5%;
+  font-size: 34px;
 }
 
 
