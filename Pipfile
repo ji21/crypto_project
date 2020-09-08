@@ -13,6 +13,7 @@ requests = "*"
 coinbase = "*"
 validate-email = "*"
 six = "*"
+djangorestframework = "*"
 
 [requires]
 python_version = "3.7"
