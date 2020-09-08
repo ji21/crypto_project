@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     'crypto',
     'authentication',
     'api',
-    'rest_framework'
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

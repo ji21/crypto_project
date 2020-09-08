@@ -15,6 +15,7 @@ validate-email = "*"
 six = "*"
 djangorestframework = "*"
 schedule = "*"
+config = "*"
 
 [requires]
 python_version = "3.7"
