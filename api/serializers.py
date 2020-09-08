@@ -6,3 +6,7 @@ class PriceInMinutesSerializer(serializers.HyperlinkedModelSerializer):
     model = PriceInMinutes
     fields = ['timestamp', 'market_price']
 
+class HisotircalDataSerializer(serializers.HyperlinkedModelSerializer):
+  class Meta:
+    model = HistoricalData
+    fields = ['market_price', 'date']
