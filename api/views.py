@@ -30,30 +30,33 @@ class HistoricalDataViewSet(viewsets.ModelViewSet):
   queryset = HistoricalData.objects.all()
   serializer_class = HisotircalDataSerializer
 
+API_KEY=os.environ.get('API_KEY')
+API_SECRET=os.environ.get('API_SECRET')
 
-def get_spot():
+def get_spot(key, secret, num):
+  print("this is previous number", num)
   start = time.time()
-
-  API_KEY=os.environ.get('API_KEY')
-  API_SECRET=os.environ.get('API_SECRET')
-  API_KEY = env('API_KEY')
-  API_SECRET = env('API_SECRET')
   client = Client(API_KEY, API_SECRET, api_version='2020-08-25')
   price = client.get_spot_price(currency='USD')
   # rates = client.get_exchange_rates(currency='BTC')
-  price_str = json.dumps(price)
+  value = price.amount
+  print("now this is current value", value)
+  print(value, datetime.datetime.now())
+  if value == num:
+    print("if clause")
+    t = threading.Timer(5, get_spot, [key,secret, value]).start()
+    return 0
+  else:
+    print("else clause")
+    end = time.time()
+    print('shifted time', end-start)
+    print("---------")
+    t = threading.Timer(60 - (end-start), get_spot, [key, secret, value]).start()
+    return 0
 
-  end = time.time()
 
-  print('shifted time', end-start)
 
-  print(price_str, datetime.datetime.now())
-
-  print("---------")
-
-  t = threading.Timer(60 - (end-start),get_spot).start()
-
-get_spot()
+get_spot(API_KEY, API_SECRET, 0)
 
 
 
