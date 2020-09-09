@@ -13,8 +13,8 @@
 
 
   <body>
-    <div class="container-fluid" style="background-color: rgb(255, 255, 255); height: 100vh;">
-      <a href="{% url 'home' %}" id="back">Back</a>
+    <div class="container-fluid p-0" style="background-color: rgb(255, 255, 255); height: 100vh;">
+      <!-- <a href="{% url 'home' %}" id="back">Back</a> -->
       {% block content %}{% endblock %}
     </div>
     {% block scripts %} {% endblock %}

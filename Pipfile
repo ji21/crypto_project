@@ -16,6 +16,10 @@ six = "*"
 djangorestframework = "*"
 schedule = "*"
 config = "*"
+channels = "*"
+websockets = "*"
+redis = "*"
+websocket-client = "*"
 
 [requires]
 python_version = "3.7"

@@ -1,8 +1,14 @@
 {% extends "base.html" %}
+{% load static %}
 
-{%block title %}Home{% endblock %}
+{% block title %}Home{% endblock %}
 
 {% block content %}
   <div id="content" class="adjusted-width">
   </div>
+{% endblock %}
+
+
+{% block scripts %}
+  <script src="{% static 'js/socket.js' %}"></script>
 {% endblock %}

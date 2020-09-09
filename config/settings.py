@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'authentication',
     'api',
     'rest_framework',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -68,6 +69,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'config.urls'
+ASGI_APPLICATION = 'config.routing.application'
 
 TEMPLATES = [
     {
@@ -122,6 +124,21 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# CHANNEL_LAYERS = {
+#   'default': {
+#     'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#     'CONFIG': {
+#       "hosts": [('127.0.0.1', 6379)],
+#     }
+#   }
+# }
+
+CHANNEL_LAYERS = {
+  "default": {
+    "BACKEND": "channels.layers.InMemoryChannelLayer"
+  }
+}
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -170,6 +187,7 @@ EMAIL_PORT = 587
 MESSAGE_TAGS={
   messages.ERROR : 'danger'
 }
+
 
 
 
