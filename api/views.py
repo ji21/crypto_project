@@ -44,6 +44,9 @@ def get_spot(key, secret, num):
   print(value, datetime.datetime.now())
   if value == num:
     print("if clause")
+    print("-------------")
+    # sleep(5)
+    # get_spot(key, secret, value)
     t = threading.Timer(5, get_spot, [key,secret, value]).start()
     return 0
   else:
@@ -51,6 +54,8 @@ def get_spot(key, secret, num):
     end = time.time()
     print('shifted time', end-start)
     print("---------")
+    # data = PriceInMinutes(market_price=value)
+    # data.save()
     t = threading.Timer(60 - (end-start), get_spot, [key, secret, value]).start()
     return 0
 
