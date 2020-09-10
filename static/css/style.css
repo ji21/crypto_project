@@ -6,8 +6,8 @@
   margin: 0;
 }
 
-h2 {
-  color: rgb(10, 10, 10);
+h3 {
+  color: rgba(10, 10, 10, 0.7);
 }
 
 #spacer {
@@ -15,6 +15,7 @@ h2 {
   width: 26%;
   min-width: 25rem;
   margin-right: 0!important;
+  background-color: rgb(251, 252, 254);
 }
 
 #content {

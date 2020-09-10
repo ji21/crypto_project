@@ -20,4 +20,6 @@ class ChartsView(View):
   def get(self, request):
     return render(request, 'crypto/charts.html')
 
-
+class LandingView(View):
+  def get(self, request):
+    return render(request, 'crypto/landing.html')

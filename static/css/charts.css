@@ -12,4 +12,42 @@
   background-color: rgb(255, 255, 255);
   border: 2px solid rgba(240, 243, 248);
   width: 90%;
+  min-width: 914px;
+}
+
+.current-price {
+  width: 27%;
+  min-width: 300px;
+}
+
+.current-price>div {
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  height: 270px;
+  border: 2px solid rgba(240, 243, 248);
+}
+
+.transaction {
+  width: 73%;
+  min-width: 600px;
+}
+
+.transaction>div {
+  background-color: rgb(255, 255, 255);
+  height: 270px;
+  border: 2px solid rgba(240, 243, 248);
+}
+
+
+.disable {
+  opacity: 0.4;
+}
+
+.enable {
+  opacity: 1;
+}
+
+.row-rapper {
+/*  margin-right: 6.5rem!important;*/
+  width: 90%;
 }

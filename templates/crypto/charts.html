@@ -6,11 +6,26 @@
 
 {% block content %}
   <div id="content" class="adjusted-width">
-    <h2 class="ml-3 mt-5">Live Bitcoin Price</h2>
-    <div class="market_price_div mt-3 mb-3 ml-3 mr-5 round">
+    <h3 class="ml-3" style="margin-top: 6rem;">Bitcoin Market Price</h3>
+    <div class="market_price_div mt-3 mb-3 ml-3 mr-4 round">
       <canvas id="myChart" class="p-3"></canvas>
     </div>
-    <h2 class="mt-5 ml-3">Make a Transaction</h2>
+    <div class="ml-3 d-flex mr-4 mt-5 row-rapper">
+      <div class="current-price mr-3">
+        <h3 class="" style="">Current Price</h3>
+        <div class="round mt-4"></div>
+      </div>
+      <div class="transaction {% if not request.user.is_authenticated %}disable{% endif %}">
+        <h3 class="">Make a Transaction</h3>
+        {% if request.user.is_authenticated %}
+          <div class="round mt-4"></div>
+        {% else %}
+          <div class="round mt-4">
+            <p style="margin: 7rem auto; width: 60%; text-align: center" class="enable">Please log in to start trading with virtual money.</p>
+          </div>
+        {% endif %}
+      </div>
+    </div>
   </div>
 {% endblock %}
 

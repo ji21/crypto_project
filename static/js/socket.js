@@ -29,7 +29,45 @@ socket.onclose = (event) => {
   console.log(event)
 }
 
+const arr = () => {
+  let now = new Date()
+  let minutes
+  let hour
+  let arr = []
+  let setter
+  for(let i=0; i < 7; i++) {
+    setter = new Date(now - i * 60000)
+    minutes = setter.getMinutes()
+    hours = setter.getHours()
+    if (minutes < 10) minutes = '0' + minutes.toString()
+    if (hours < 10) hour = '0' + hours.toString()
+    minutes.toString()
+    hour.toString()
+    arr.unshift(`${hour}:${minutes}`)
+  }
+  return arr
+}
 
+labels = arr()
+
+const updateTime = () => {
+  let now = new Date()
+  let minutes = now.getMinutes()
+  let hours = now.getHours()
+  if (minutes < 10) minutes = '0' + minutes.toString()
+  if (hours < 10) hour = '0' + hours.toString()
+  minutes.toString()
+  hour.toString()
+
+  console.log(`${hour}:${minutes}`)
+}
+
+console.log(60000 - new Date().getSeconds()*1000)
+// 60000 - new Date().getSeconds()*1000
+
+setInterval(function() {
+  updateTime();
+}, 60000 - new Date().getSeconds()*1000);
 
 
 var ctx = document.getElementById('myChart').getContext('2d');
@@ -39,7 +77,7 @@ var chart = new Chart(ctx, {
 
     // The data for our dataset
     data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: labels,
         datasets: [{
             label: 'My First dataset',
             backgroundColor: 'rgba(255, 99, 132, 0)',
@@ -59,17 +97,29 @@ var chart = new Chart(ctx, {
        hover: {
           mode: 'index',
           intersect: false,
-          animationDuration: 100
+          animationDuration: 0
        },
        legend: {
         display: false
        },
         title: {
           display: true,
-          text: 'Market Spot Price'
+          text: '。Live Data',
+          position: 'top',
+          fontColor: 'rgb(255, 99, 132)',
+          fontSize: 20
+        },
+        scales: {
+          yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: '$USD / BTC',
+              fontSize: 18
+            }
+          }]
         }
-    }
-});
+      }
+  });
 
 
 
