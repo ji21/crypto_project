@@ -3,19 +3,31 @@
   flex-direction: column;
   margin: auto;
   padding: 0;
-  align-items: center;
   min-width: 450px;
   width: 450px;
   border-radius: 1rem;
   box-shadow: 3px 3px 20px rgba(235, 238, 243);
 }
 
+#or {
+  position: relative;
+  width: 30px;
+  bottom: 30px;
+  left: 150px;
+  background-color: #fff;
+  text-align: center;
+  color: #282C34;
+}
+
 .messages {
   width: 100%;
+  margin-top: 2rem;
 }
 
 form {
   width: 100%!important;
+  height: 250px;
+  border-bottom: 2px solid rgba(240, 243, 248);
 }
 
 .login-container {

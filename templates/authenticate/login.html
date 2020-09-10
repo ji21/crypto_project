@@ -9,9 +9,10 @@
 
 {% block content %}
   <div class="login-container">
-    <div class="login-form-div p-5">
+    <div class="login-form-div" style="padding-bottom: 3rem!important; padding-top: 3rem!important; padding: 4rem">
+      <h1 class="mb-4">Login to Bytimise</h1>
       {% include '../helpers/messages.html/' %}
-      <form method="POST" action="{% url 'login' %}">
+      <form class="mt-2" method="POST" action="{% url 'login' %}">
       {% csrf_token %}
         <div class="form-group">
           <label for="signin-mail">Username</label>
@@ -24,10 +25,12 @@
           <p class="mt-2 mb-0 alert alert-danger" style="display: none; font-size: 12px; transition: all 0.2s" id="password-feedback"></p>
         </div>
         <div class="d-flex align-items-center mt-4">
-          <button type="submit" id="submit" class="btn form-btn">Sign In</button>
+          <button type="submit" id="submit" class="btn pt-2 pb-2 pl-4 pr-4 form-btn">Sign In</button>
           <p class="mt-0 mb-0 ml-3" style="font-size: 16px; color: rgba(0, 0, 0, 0.6)"><a href="{% url 'reset' %}" class="login">Forgot your password?</a></p>
         </div>
       </form>
+      <div id="or" style="color: rgba(0, 0, 0, 0.5);">or</div>
+      <a href="{% url 'register' %}" class="btn w-100 form-btn" style="padding-top: 13px; padding-bottom: 13px">Create an account</a>
     </div>
   </div>
 {% endblock %}
