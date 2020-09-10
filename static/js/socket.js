@@ -14,7 +14,7 @@ const endpoint = "ws://localhost:8000/ws/priceData/"
 
 const socket = new WebSocket(endpoint)
 socket.onmessage = (event) => {
-  console.log(event)
+  console.log(event.value)
 }
 
 socket.onopen = (event) => {
@@ -45,6 +45,8 @@ const arr = () => {
     hour.toString()
     arr.unshift(`${hour}:${minutes}`)
   }
+  arr.push([''])
+  arr.push([''])
   return arr
 }
 
@@ -58,8 +60,8 @@ const updateTime = () => {
   if (hours < 10) hour = '0' + hours.toString()
   minutes.toString()
   hour.toString()
-
-  dataObj.data.labels.push(`${hour}:${minutes}`)
+  dataObj.data.labels[7] = `${hour}:${minutes}`
+  dataObj.data.labels.push([''])
   dataObj.data.labels.shift()
   chart.update()
   console.log(`${hour}:${minutes}`)
@@ -125,8 +127,8 @@ var chart = new Chart(ctx, dataObj);
 
 
 setInterval(function() {
-  updateTime();
-}, 60000 - new Date().getSeconds()*1000);
+  if (new Date().getSeconds() === 0)updateTime();
+}, 1000);
 
 
 
