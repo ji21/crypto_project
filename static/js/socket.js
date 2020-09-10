@@ -10,21 +10,21 @@
 // }
 
 // console.log(endpoint)
+const endpoint = "ws://localhost:8000/ws/priceData/"
 
+const socket = new WebSocket(endpoint)
+socket.onmessage = (event) => {
+  console.log(event)
+}
 
-// const socket = new WebSocket(endpoint)
-// socket.onmessage = (event) => {
-//   console.log(event)
-// }
+socket.onopen = (event) => {
+  console.log(event)
+}
 
-// socket.onopen = (event) => {
-//   console.log(event)
-// }
+socket.onerror = (event) => {
+  console.log(event)
+}
 
-// socket.onerror = (event) => {
-//   console.log(event)
-// }
-
-// socket.onclose = (event) => {
-//   console.log(event)
-// }
+socket.onclose = (event) => {
+  console.log(event)
+}

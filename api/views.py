@@ -73,28 +73,54 @@ API_KEY=os.environ.get('API_KEY')
 API_SECRET=os.environ.get('API_SECRET')
 
 def fetcher(key, secret):
+  setter = 0
+  checker = 1
   ws = websocket.WebSocket()
   ws.connect('ws://localhost:8000/ws/priceData/')
-  setter = 0
   while True:
-    print(threading.enumerate())
     start = time.time()
-    value = get_spot(key, secret)
-    if value == setter:
+    print(threading.enumerate())
+    if checker == 1:
+      value = get_spot(key, secret)
+      # if value == setter:
+      #   end = time.time()
+      #   ws.send(json.dumps({"value": None}))
+      #   time.sleep(30.0 - (end-start))
+      #   continue
+      data = PriceInMinutes(market_price=float(value))
+      data.save()
+      setter = value
+      checker = 0
+      ws.send(json.dumps({"value": value}))
       end = time.time()
-      time.sleep(30.0)
-      continue
-    print(value)
-    data = PriceInMinutes(market_price=float(value))
-    data.save()
-    ws.send(json.dumps({"value": value}))
-    setter = value
-    end = time.time()
-    time.sleep(60.0 - (end-start))
+      time.sleep(30.0 - (end-start))
+    else:
+      ws.send(json.dumps({"value": None}))
+      checker = 1
+      end = time.time()
+      time.sleep(30.0 - (end-start))
 
 
-print("bilibala")
 t = threading.Timer(5, fetcher, [API_KEY, API_SECRET]).start()
+
+# def a():
+#   ws = websocket.WebSocket()
+#   ws.connect('ws://localhost:8000/ws/priceData/')
+#   while True:
+#     print(threading.enumerate())
+#     ws.send(json.dumps({"value": 60}))
+#     time.sleep(40)
+# t = threading.Timer(5, a).start()
+
+# ws = websocket.WebSocket()
+# ws.connect('ws://localhost:8000/ws/priceData/')
+
+# for i in range(100):
+#   ws.send(json.dumps({"value": value}))
+
+
+
+
 
 
 

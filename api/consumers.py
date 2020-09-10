@@ -19,7 +19,6 @@ from .models import PriceInMinutes
 
 
 
-
 class PriceConsumer(AsyncWebsocketConsumer):
   async def connect(self):
     # print('asjfkdhjbakjb')
@@ -43,13 +42,27 @@ class PriceConsumer(AsyncWebsocketConsumer):
   async def disconnect(self, close_code):
     # print("connected------>", event)
     # await self.disconnect()
-    raise channels.exceptions.StopConsumer
+
     pass
 
   async def receive(self, text_data):
     data_point = json.loads(text_data)
-    print(">>>>>", data_point['value'])
+
+    await self.channel_layer.group_send(
+        self.groupname,
+        {
+          "type": "deprocessing",
+          "value": data_point['value']
+        }
+      )
+
+    print(">>>>>", text_data)
     pass
+
+
+  async def deprocessing(self, event):
+    value = event['value']
+    await self.send(text_data=json.dumps({'value': value}))
 
     # print("connected------>", event)
     # await self.send({
