@@ -59,19 +59,17 @@ const updateTime = () => {
   minutes.toString()
   hour.toString()
 
+  dataObj.data.labels.push(`${hour}:${minutes}`)
+  dataObj.data.labels.shift()
+  chart.update()
   console.log(`${hour}:${minutes}`)
 }
 
 console.log(60000 - new Date().getSeconds()*1000)
 // 60000 - new Date().getSeconds()*1000
 
-setInterval(function() {
-  updateTime();
-}, 60000 - new Date().getSeconds()*1000);
 
-
-var ctx = document.getElementById('myChart').getContext('2d');
-var chart = new Chart(ctx, {
+var dataObj = {
     // The type of chart we want to create
     type: 'line',
 
@@ -119,10 +117,16 @@ var chart = new Chart(ctx, {
           }]
         }
       }
-  });
+  }
+
+var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, dataObj);
 
 
 
+setInterval(function() {
+  updateTime();
+}, 60000 - new Date().getSeconds()*1000);
 
 
 
