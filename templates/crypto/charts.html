@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Charts{% endblock %}
+{% block stylesheet %} <link rel="stylesheet" type="text/css" href="{% static 'css/charts.css' %}">{% endblock %}
+
+{% block content %}
+  <div id="content" class="adjusted-width">
+    <h2 class="ml-3 mt-5">Live Bitcoin Price</h2>
+    <div class="market_price_div mt-3 mb-3 ml-3 mr-5 round">
+      <canvas id="myChart" class="p-3"></canvas>
+    </div>
+    <h2 class="mt-5 ml-3">Make a Transaction</h2>
+  </div>
+{% endblock %}
+
+
+{% block scripts %}
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <script src="{% static 'js/socket.js' %}"></script>
+{% endblock %}

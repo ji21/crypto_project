@@ -16,11 +16,8 @@ from django.views import View
 def home(request):
   return render(request, 'crypto/home.html')
 
-
-
-class LogoutView(View):
-  def post(self, request):
-    auth.logout(request)
-    return redirect('home')
+class ChartsView(View):
+  def get(self, request):
+    return render(request, 'crypto/charts.html')
 
 

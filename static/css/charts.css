@@ -1,0 +1,15 @@
+#chart {
+  background-color: rgb(238, 245, 255);
+  color: rgb(57, 106, 255)!important;
+}
+
+#chart:hover {
+  background-color: rgb(238, 245, 255)!important;
+  color: rgb(57, 106, 255)!important;
+}
+
+.market_price_div{
+  background-color: rgb(255, 255, 255);
+  border: 2px solid rgba(240, 243, 248);
+  width: 90%;
+}

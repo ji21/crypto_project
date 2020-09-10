@@ -6,12 +6,15 @@
   margin: 0;
 }
 
+h2 {
+  color: rgb(10, 10, 10);
+}
+
 #spacer {
   height: 100vh;
   width: 26%;
   min-width: 25rem;
   margin-right: 0!important;
-  border:1px solid black;
 }
 
 #content {
@@ -21,7 +24,7 @@
   overflow: scroll;
   height: 100vh;
   margin-left: 0!important;
-  border:1px solid black;
+  background-color: rgb(251, 252, 254);
 }
 
 body {
@@ -50,8 +53,8 @@ body {
 .share {
   width: 80%;
   margin: 0 auto;
-  border: 1px solid black;
-  height: 300px;
+  height: 350px;
+  background-color: rgb(255, 234, 244);
 }
 
 /*.form-wrapper {
@@ -109,6 +112,16 @@ body {
   display: flex;
   flex-direction: column;
   align-items: start;
+}
+
+#list > a {
+  color: rgb(80, 88, 135);
+}
+
+#list > a:hover {
+  text-decoration: none;
+  background-color: rgba(238, 245, 255, 0.5);
+  color: rgba(57, 106, 255, 0.5)
 }
 
 .valid {
@@ -289,6 +302,7 @@ label {
   display: flex;
   height: 5rem;
   align-items: center;
+  border: 2px solid rgba(240, 243, 248);
 }
 
 
@@ -345,6 +359,9 @@ button:focus {
   box-shadow: inset 0 -1px 0 white;
 }
 
+.btn.focus, .btn:focus {
+  box-shadow: 0 0 0 0.2rem #fff!important;
+}
 
 
 .hide {
@@ -363,6 +380,10 @@ button:focus {
 
 .round {
   border-radius: 1rem;
+}
+
+.round-d {
+  border-radius: 2rem;
 }
 
 /*css to overwrite boostrap loading animation*/

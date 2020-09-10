@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <title>{% block title %}Trading 101{% endblock %}</title>
+    {% block stylesheet %} {% endblock %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script src="https://kit.fontawesome.com/5144514a65.js" crossorigin="anonymous"></script>
   </head>
@@ -13,9 +14,9 @@
 
   <body>
     <div class="vertical-nav">
-      <a class="navbar-brand mt-5 mb-5 p-3 main-title" href="{% url 'home' %}"><i class="fab fa-btc" style="color: rgb(45, 96, 255)!important; font-size: 34px"></i>ytimise</a>
-      <div class="login-div">
-        <i class="fad fa-user-lock mr-3" style="min-width: 50px; height: 60%; border: 1px solid black"></i>
+      <a class="navbar-brand mt-5 mb-4 p-3 main-title" href="{% url 'home' %}"><i class="fab fa-btc" style="color: rgb(45, 96, 255)!important; font-size: 34px"></i>ytimise</a>
+      <div class="login-div round">
+        <i class="fad fa-user-lock mr-3 ml-3" style="min-width: 50px; height: 60%; border: 1px solid black"></i>
         {% if request.user.is_authenticated %}
           <div class="center">
             <a href="{% url 'profile' %}" class="radius" style="text-align: start; color:rgb(48, 53, 124)!important">{{request.user.email}}</a>
@@ -23,18 +24,18 @@
         {% else %}
         <div class="center">
             <a href="{% url 'login' %}" class="radius" style="text-align: start">Login</a>
-            <div class="register">Don't have an account? <a href="{% url 'register' %}">Sign up.</a></div>
+            <div class="register">Not a member? <a href="{% url 'register' %}">Sign up.</a></div>
         </div>
         {% endif %}
       </div>
       <div id="list" class="pb-3 pt-3 mt-5">
-        <btn class="p-3 round" style="border: 1px solid black; width: 100%">Home</btn>
-        <btn class="p-3 round" style="border: 1px solid black; width: 100%">Charts</btn>
-        <btn class="p-3 round" style="border: 1px solid black; width: 100%">Analytics</btn>
+        <a class="pt-3 pb-3 pr-3 pl-4 round" id="home" style="width: 100%" href="{% url 'home' %}">Home</a>
+        <a class="pt-3 pb-3 pr-3 pl-4 round" id="chart" style="width: 100%" href="{% url 'charts' %}">Charts</a>
+        <a class="pt-3 pb-3 pr-3 pl-4 round" style="width: 100%">Analytics</a>
       </div>
         <div id="accordion" class="big-div pt-3">
           <div class="card fixer">
-            <div class="card-header fixer p-3" id="headingOne">
+            <div class="card-header fixer pt-3 pb-3 pr-3 pl-4" id="headingOne">
               <div>
                 <button class="btn fixer home-font p-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                   About
@@ -43,13 +44,13 @@
             </div>
 
             <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-              <div class="card-body fixer">
+              <div class="card-body fixer pt-0">
                 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
               </div>
             </div>
           </div>
           <div class="card fixer">
-            <div class="card-header fixer p-3" id="headingTwo">
+            <div class="card-header fixer pt-3 pb-3 pr-3 pl-4" id="headingTwo">
               <div class="mb-0">
                 <button class="btn collapsed fixer home-font p-0" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                   Contact
@@ -57,13 +58,13 @@
               </div>
             </div>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-              <div class="card-body fixer">
+              <div class="card-body fixer pt-0">
                 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
               </div>
             </div>
           </div>
         </div>
-        <div class="share round mb-5"></div>
+        <div class="share round-d mb-5 mt-3"></div>
     </div>
     <div class="my-container">
       <div id="spacer"></div>

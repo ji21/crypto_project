@@ -72,44 +72,44 @@ def get_spot(key, secret):
 
 
 
-# API_KEY=os.environ.get('API_KEY')
-# API_SECRET=os.environ.get('API_SECRET')
+API_KEY=os.environ.get('API_KEY')
+API_SECRET=os.environ.get('API_SECRET')
 
-# def fetcher(key, secret):
-#   setter = 0
-#   checker = 1
-#   ws = websocket.WebSocket()
-#   ws.connect('ws://localhost:8000/ws/priceData/')
-#   while True:
-#     start = time.time()
-#     print(threading.enumerate())
-#     if checker == 1:
-#       value = get_spot(key, secret)
-#       # if value == setter:
-#       #   end = time.time()
-#       #   ws.send(json.dumps({"value": None}))
-#       #   time.sleep(30.0 - (end-start))
-#       #   continue
-#       data = PriceInMinutes(market_price=float(value))
-#       data.save()
-#       setter = value
-#       checker = 0
-#       ws.send(json.dumps({"value": value}))
-#       end = time.time()
-#       time.sleep(30.0 - (end-start))
-#     else:
-#       ws.send(json.dumps({"value": None}))
-#       checker = 1
-#       end = time.time()
-#       time.sleep(30.0 - (end-start))
-
-
-# t = threading.Timer(5, fetcher, [API_KEY, API_SECRET]).start()
+def fetcher(key, secret):
+  setter = 0
+  checker = 1
+  ws = websocket.WebSocket()
+  ws.connect('ws://localhost:8000/ws/priceData/')
+  while True:
+    start = time.time()
+    print(threading.enumerate())
+    if checker == 1:
+      value = get_spot(key, secret)
+      # if value == setter:
+      #   end = time.time()
+      #   ws.send(json.dumps({"value": None}))
+      #   time.sleep(30.0 - (end-start))
+      #   continue
+      data = PriceInMinutes(market_price=float(value))
+      data.save()
+      setter = value
+      checker = 0
+      ws.send(json.dumps({"value": value}))
+      end = time.time()
+      time.sleep(30.0 - (end-start))
+    else:
+      ws.send(json.dumps({"value": None}))
+      checker = 1
+      end = time.time()
+      time.sleep(30.0 - (end-start))
 
 
+t = threading.Timer(60.0 - (datetime.datetime.now().second + datetime.datetime.now().microsecond/1000000), fetcher, [API_KEY, API_SECRET]).start()
 
 
-# datetime.datetime.now().second + datetime.datetime.now().microsecond/1000000
+
+
+datetime.datetime.now().second + datetime.datetime.now().microsecond/1000000
 
 
 
