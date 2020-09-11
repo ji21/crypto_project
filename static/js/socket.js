@@ -10,6 +10,16 @@
 // }
 const host = 'http://127.0.0.1:8000/api/price/'
 
+function formatDate() {
+  const today = new Date();
+  const dd = String(today.getDate()).padStart(2, '0');
+  const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  const yyyy = today.getFullYear();
+
+  return [yyyy, mm, dd].join('-');
+}
+
+
 const arr = () => {
   let now = new Date()
   let minutes
@@ -44,7 +54,7 @@ var dataObj = {
     data: {
         labels: labels,
         datasets: [{
-            label: 'My First dataset',
+            label: 'Price',
             backgroundColor: 'rgba(255, 99, 132, 0)',
             borderColor: 'rgb(255, 99, 132)',
             data: [],
@@ -90,13 +100,88 @@ var dataObj = {
               // }
             }
           }]
+        },
+        elements: {
+          line: {
+            tension: 0
+          }
         }
       }
   }
+
+var hisObj = {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+        labels: [],
+        datasets: [{
+            label: 'Price',
+            backgroundColor: 'rgba(255, 99, 132, 0)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [],
+            pointRadius: 0
+        }]
+    },
+
+    // Configuration options go here
+    options: {
+      maintainAspectRatio: false,
+      aspectRatio: 1,
+       tooltips: {
+          mode: 'index',
+          intersect: false
+       },
+       hover: {
+          mode: 'index',
+          intersect: false,
+          animationDuration: 0
+       },
+       legend: {
+        display: false
+       },
+        scales: {
+          yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: '$USD / BTC',
+              fontSize: 18
+              // ticks: {
+              //   beginAtZero: false,
+              //   steps: 10,
+              //   stepValue: 5,
+              //   max: 100000
+              // }
+            }
+          }],
+          xAxes: [{
+            scaleLabel: {
+              ticks: {
+                stepValue: 3,
+                steps: 5
+              }
+            }
+          }]
+        },
+          elements: {
+            line: {
+              tension: 0
+            }
+          }
+        }
+      }
+
+
 var ctx = document.getElementById('myChart').getContext('2d');
 var chart = new Chart(ctx, dataObj);
 
+console.log(ctx)
 
+var htx = document.getElementById('historicalChart').getContext('2d')
+var hisChart = new Chart(htx, hisObj)
+
+console.log(htx)
 
 fetch('http://127.0.0.1:8000/api/price').then(res=>res.json()).then(data=>{
   // console.log(data.slice(data.length-7, data.length))
@@ -107,6 +192,86 @@ fetch('http://127.0.0.1:8000/api/price').then(res=>res.json()).then(data=>{
     chart.update()
   }
 })
+
+const weekFromNow = (dateNow) => {
+  const d = new Date(dateNow);
+  console.log(d.toLocaleDateString());
+  d.setDate(d.getDate() - 10);
+  console.log(d.toLocaleDateString())
+  return d.toLocaleDateString().split('/').reverse().join('-')
+}
+
+const renderChart = async (startFrom, dateNow) => {
+  // const dateNow = await formatDate()
+  // console.log("------->", dateNow)
+  // const startFrom = weekFromNow(dateNow)
+  // console.log("---->", startFrom)
+  fetch(`https://api.coindesk.com/v1/bpi/historical/close.json?start=${startFrom}&end=${dateNow}`)
+    .then(res=>res.json())
+    .then(data=>{
+      let x = []
+      let y = []
+      for (const [key, value] of Object.entries(data.bpi)) {
+        x.push(key)
+        y.push(value)
+      }
+      console.log(x)
+      y.push(['', '', ''])
+      hisObj.data.labels = x
+      hisObj.data.datasets[0].data = y
+      hisChart.update()
+    })
+}
+
+const dateNow = formatDate()
+const lastWeek = weekFromNow(dateNow)
+
+renderChart(lastWeek, dateNow)
+
+const week = document.querySelector("#pills-week-tab")
+const month = document.querySelector("#pills-month-tab")
+const all = document.querySelector("#pills-max-tab")
+const pad = document.querySelector("#pad-change")
+
+week.addEventListener("click", ()=>{
+  if (!week.classList.contains('active')) {
+    const dateNow = formatDate()
+    const lastWeek = weekFromNow(dateNow)
+    renderChart(lastWeek, dateNow)
+    pad.classList.remove('pb-2')
+    pad.classList.add('pb-5')
+  }
+})
+
+const monthFromNow = (dateNow) => {
+  const d = new Date(dateNow);
+  console.log(d.toLocaleDateString());
+  d.setDate(d.getDate() - 34);
+  console.log(d.toLocaleDateString())
+  return d.toLocaleDateString().split('/').reverse().join('-')
+}
+
+
+month.addEventListener("click", ()=>{
+  if (!month.classList.contains('active')) {
+    const dateNow = formatDate()
+    const lastmonth = monthFromNow(dateNow)
+    renderChart(lastmonth, dateNow)
+    pad.classList.remove('pb-5')
+    pad.classList.add('pb-2')
+  }
+})
+
+all.addEventListener("click", ()=>{
+  if (!all.classList.contains('active')) {
+    const dateNow = formatDate()
+    const start = '2016-01-21'
+    renderChart(start, dateNow)
+    pad.classList.remove('pb-5')
+    pad.classList.add('pb-2')
+  }
+})
+
 
 
 

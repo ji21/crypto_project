@@ -100,8 +100,7 @@ def fetcher(key, secret):
     else:
       ws.send(json.dumps({"value": None}))
       checker = 1
-      end = time.time()
-      time.sleep(30.0 - (end-start))
+      time.sleep(60.0 - (datetime.datetime.now().second + datetime.datetime.now().microsecond/1000000))
 
 
 t = threading.Timer(60.0 - (datetime.datetime.now().second + datetime.datetime.now().microsecond/1000000), fetcher, [API_KEY, API_SECRET]).start()
