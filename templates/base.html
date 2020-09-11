@@ -16,7 +16,7 @@
     <div class="vertical-nav">
       <a class="navbar-brand mt-4 mb-4 p-3 main-title" href="{% url 'home' %}"><i class="fab fa-btc" style="color: rgb(45, 96, 255)!important; font-size: 34px"></i>ytimise</a>
       <div class="login-div round">
-        <i class="fad fa-user-lock mr-3 ml-3" style="min-width: 50px; height: 60%; border: 1px solid black"></i>
+        <i class="fas fa-user-secret ml-4 mr-4" style="font-size: 40px;color:rgb(48, 53, 124)"></i>
         {% if request.user.is_authenticated %}
           <div class="center">
             <a href="{% url 'profile' %}" class="radius" style="text-align: start; color:rgb(48, 53, 124)!important">{{request.user.email}}</a>
@@ -37,8 +37,8 @@
         <div style="height: 3rem"></div>
       {% endif %}
       <div id="list" class="pb-3 pt-3">
-        <a class="pt-3 pb-3 pr-3 pl-4 round" id="home" style="width: 100%" href="{% url 'home' %}">Home</a>
-        <a class="pt-3 pb-3 pr-3 pl-4 round" id="chart" style="width: 100%" href="{% url 'charts' %}">Charts</a>
+        <a class="pt-3 pb-3 pr-3 pl-4 round" id="home" style="width: 100%" href="{% url 'home' %}"><i class="fas fa-home mr-2"></i>Home</a>
+          <a class="pt-3 pb-3 pr-3 pl-4 round" id="chart" style="width: 100%" href="{% url 'charts' %}"><i class="fas fa-chart-line mr-2"></i>Charts</a>
       </div>
         <div id="accordion" class="big-div pt-3">
           <div class="card fixer">

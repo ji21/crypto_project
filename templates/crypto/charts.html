@@ -13,7 +13,14 @@
     <div class="ml-3 d-flex mr-4 mt-5 row-rapper">
       <div class="current-price mr-3">
         <h3 class="" style="">Current Price</h3>
-        <div class="round mt-4"></div>
+        <div class="round mt-4 d-flex flex-column align-items-center">
+          <div class="mb-4 mt-4">1 BTC = 10000.0 USD</div>
+          <div class="d-flex align-items-center">
+            <div class="mr-2" style="font-size: 30px; color: #3BE2AB; font-weight: 500">+13%</div>
+            <i class="far fa-thumbs-up pt-3 pb-4" style="font-size: 60px; color: #3BE2AB"></i>
+          </div>
+          <div class="mt-4" style="color: #3BE2AB; font-weight: 500">A 13% increase in market price.</div>
+        </div>
       </div>
       <div class="transaction {% if not request.user.is_authenticated %}disable{% endif %}">
         <h3 class="">Make a Transaction</h3>

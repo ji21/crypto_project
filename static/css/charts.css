@@ -23,7 +23,7 @@
 .current-price>div {
   width: 100%;
   background-color: rgb(255, 255, 255);
-  height: 270px;
+  height: 260px;
   border: 2px solid rgba(240, 243, 248);
 }
 
@@ -34,7 +34,7 @@
 
 .transaction>div {
   background-color: rgb(255, 255, 255);
-  height: 270px;
+  height: 260px;
   border: 2px solid rgba(240, 243, 248);
 }
 

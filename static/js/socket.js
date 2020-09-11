@@ -16,7 +16,7 @@ const arr = () => {
   let hours
   let arr = []
   let setter
-  for(let i=0; i < 7; i++) {
+  for(let i=0; i < 31; i++) {
     setter = new Date(now - i * 60000)
     minutes = setter.getMinutes()
     hours = setter.getHours()
@@ -48,7 +48,7 @@ var dataObj = {
             backgroundColor: 'rgba(255, 99, 132, 0)',
             borderColor: 'rgb(255, 99, 132)',
             data: [],
-            pointRadius: 5,
+            pointRadius: 3,
             pointHoverRadius: 6
         }]
     },
@@ -71,7 +71,7 @@ var dataObj = {
        },
         title: {
           display: true,
-          text: '。Live Data',
+          text: '。Live Data - updates every minute.',
           position: 'top',
           fontColor: 'rgb(255, 99, 132)',
           fontSize: 20
@@ -82,6 +82,12 @@ var dataObj = {
               display: true,
               labelString: '$USD / BTC',
               fontSize: 18
+              // ticks: {
+              //   beginAtZero: false,
+              //   steps: 10,
+              //   stepValue: 5,
+              //   max: 100000
+              // }
             }
           }]
         }
@@ -95,7 +101,7 @@ var chart = new Chart(ctx, dataObj);
 fetch('http://127.0.0.1:8000/api/price').then(res=>res.json()).then(data=>{
   // console.log(data.slice(data.length-7, data.length))
   if (data.length > 7) {
-    data = data.slice(data.length-7, data.length)
+    data = data.slice(data.length-31, data.length)
     data = data.map(x=> x.market_price)
     dataObj.data.datasets[0].data = data
     chart.update()
@@ -143,7 +149,7 @@ const updateTime = () => {
   if (hours < 10) hours = '0' + hours.toString()
   minutes.toString()
   hours.toString()
-  dataObj.data.labels[7] = `${hours}:${minutes}`
+  dataObj.data.labels[31] = `${hours}:${minutes}`
   dataObj.data.labels.push([''])
   dataObj.data.labels.shift()
   chart.update()
