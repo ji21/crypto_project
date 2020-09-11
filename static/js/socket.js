@@ -238,8 +238,8 @@ week.addEventListener("click", ()=>{
     const dateNow = formatDate()
     const lastWeek = weekFromNow(dateNow)
     renderChart(lastWeek, dateNow)
-    pad.classList.remove('pb-2')
-    pad.classList.add('pb-5')
+    // pad.classList.remove('pb-2')
+    // pad.classList.add('pb-5')
   }
 })
 
@@ -257,8 +257,8 @@ month.addEventListener("click", ()=>{
     const dateNow = formatDate()
     const lastmonth = monthFromNow(dateNow)
     renderChart(lastmonth, dateNow)
-    pad.classList.remove('pb-5')
-    pad.classList.add('pb-2')
+    // pad.classList.remove('pb-5')
+    // pad.classList.add('pb-2')
   }
 })
 
@@ -267,8 +267,8 @@ all.addEventListener("click", ()=>{
     const dateNow = formatDate()
     const start = '2016-01-21'
     renderChart(start, dateNow)
-    pad.classList.remove('pb-5')
-    pad.classList.add('pb-2')
+    // pad.classList.remove('pb-5')
+    // pad.classList.add('pb-2')
   }
 })
 
