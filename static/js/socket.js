@@ -8,31 +8,12 @@
 // } else {
 //   endpoint = `ws://${window.location.host}${window.location.pathname}`
 // }
-
-// console.log(endpoint)
-const endpoint = "ws://localhost:8000/ws/priceData/"
-
-const socket = new WebSocket(endpoint)
-socket.onmessage = (event) => {
-  console.log(event.value)
-}
-
-socket.onopen = (event) => {
-  console.log(event)
-}
-
-socket.onerror = (event) => {
-  console.log(event)
-}
-
-socket.onclose = (event) => {
-  console.log(event)
-}
+const host = 'http://127.0.0.1:8000/api/price/'
 
 const arr = () => {
   let now = new Date()
   let minutes
-  let hour
+  let hours
   let arr = []
   let setter
   for(let i=0; i < 7; i++) {
@@ -40,10 +21,10 @@ const arr = () => {
     minutes = setter.getMinutes()
     hours = setter.getHours()
     if (minutes < 10) minutes = '0' + minutes.toString()
-    if (hours < 10) hour = '0' + hours.toString()
+    if (hours < 10) hours = '0' + hours.toString()
     minutes.toString()
-    hour.toString()
-    arr.unshift(`${hour}:${minutes}`)
+    hours.toString()
+    arr.unshift(`${hours}:${minutes}`)
   }
   arr.push([''])
   arr.push([''])
@@ -52,24 +33,8 @@ const arr = () => {
 
 labels = arr()
 
-const updateTime = () => {
-  let now = new Date()
-  let minutes = now.getMinutes()
-  let hours = now.getHours()
-  if (minutes < 10) minutes = '0' + minutes.toString()
-  if (hours < 10) hour = '0' + hours.toString()
-  minutes.toString()
-  hour.toString()
-  dataObj.data.labels[7] = `${hour}:${minutes}`
-  dataObj.data.labels.push([''])
-  dataObj.data.labels.shift()
-  chart.update()
-  console.log(`${hour}:${minutes}`)
-}
-
-console.log(60000 - new Date().getSeconds()*1000)
-// 60000 - new Date().getSeconds()*1000
-
+// console.log(endpoint)
+const endpoint = "ws://localhost:8000/ws/priceData/"
 
 var dataObj = {
     // The type of chart we want to create
@@ -82,7 +47,9 @@ var dataObj = {
             label: 'My First dataset',
             backgroundColor: 'rgba(255, 99, 132, 0)',
             borderColor: 'rgb(255, 99, 132)',
-            data: [1000, 2500, 1250, 2003, 3000, 1000, 100]
+            data: [],
+            pointRadius: 5,
+            pointHoverRadius: 6
         }]
     },
 
@@ -120,9 +87,73 @@ var dataObj = {
         }
       }
   }
-
 var ctx = document.getElementById('myChart').getContext('2d');
 var chart = new Chart(ctx, dataObj);
+
+
+
+fetch('http://127.0.0.1:8000/api/price').then(res=>res.json()).then(data=>{
+  // console.log(data.slice(data.length-7, data.length))
+  if (data.length > 7) {
+    data = data.slice(data.length-7, data.length)
+    data = data.map(x=> x.market_price)
+    dataObj.data.datasets[0].data = data
+    chart.update()
+  }
+})
+
+
+
+const socket = new WebSocket(endpoint)
+socket.onmessage = (event) => {
+  value = (JSON.parse(event.data).value)
+  if (value !== null) {
+    value.toString()
+    console.log(value)
+    console.log(dataObj.data.datasets[0].data)
+    dataObj.data.datasets[0].data.shift()
+    dataObj.data.datasets[0].data.push(value)
+    chart.update()
+  }
+}
+
+socket.onopen = (event) => {
+  console.log(event)
+}
+
+socket.onerror = (event) => {
+  console.log(event)
+}
+
+socket.onclose = (event) => {
+  console.log(event)
+}
+
+
+
+
+
+
+
+const updateTime = () => {
+  let now = new Date()
+  let minutes = now.getMinutes()
+  let hours = now.getHours()
+  if (minutes < 10) minutes = '0' + minutes.toString()
+  if (hours < 10) hours = '0' + hours.toString()
+  minutes.toString()
+  hours.toString()
+  dataObj.data.labels[7] = `${hours}:${minutes}`
+  dataObj.data.labels.push([''])
+  dataObj.data.labels.shift()
+  chart.update()
+  console.log(`${hours}:${minutes}`)
+}
+
+console.log(60000 - new Date().getSeconds()*1000)
+// 60000 - new Date().getSeconds()*1000
+
+
 
 
 
