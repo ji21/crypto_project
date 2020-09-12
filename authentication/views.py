@@ -61,7 +61,6 @@ class RegView(View):
     phone = request.POST['phone']
     confirm = request.POST['confirm']
 
-
     if User.objects.filter(username=username).exists():
       messages.error(request, 'Username has already been taken. Please choose another one.')
       return render(request, 'authenticate/register.html')

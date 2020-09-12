@@ -55,8 +55,7 @@ INSTALLED_APPS = [
     'authentication',
     'api',
     'rest_framework',
-    'channels',
-    'preferences'
+    'channels'
 ]
 
 MIDDLEWARE = [
