@@ -203,7 +203,7 @@ fetch(`${host}`).then(res=>res.json()).then(data=>{
       diff.innerText = `+${difference} USD`
       diff.style.color = "#3BE2AB"
       statement.innerText = `An increase of ${difference} USD per BTC compared to last minute.`
-      thumb.classList.remove("fa-angle-double-down")
+      thumb.classList.remove("fa-angle-double-down", "fa-equals")
       thumb.classList.add("fa-angle-double-up")
       thumb.style.color = "#3BE2AB"
     } else if (difference < 0) {
@@ -211,8 +211,15 @@ fetch(`${host}`).then(res=>res.json()).then(data=>{
       diff.style.color = "rgb(255, 99, 132)"
       statement.innerText = `A decrease of ${Math.abs(difference)} USD per BTC compared to last minute.`
       thumb.classList.add("fa-angle-double-down")
-      thumb.classList.remove("fa-angle-double-up")
+      thumb.classList.remove("fa-angle-double-up", "fa-equals")
       thumb.style.color = "rgb(255, 99, 132)"
+    } else {
+      diff.innerText = `0 USD`
+      diff.style.color = "rgba(10, 10, 10, 0.6)"
+      statement.innerText = `No change in bitcoin price compared to last minute.`
+      thumb.style.color = "rgba(10, 10, 10, 0.6)"
+      thumb.classList.add("fa-equals")
+      thumb.classList.remove("fa-angle-double-up", "fa-angle-double-down")
     }
     chart.update()
     priceText.innerText = `1 BTC = ${value} USD`
@@ -232,6 +239,7 @@ const renderChart = async (startFrom, dateNow) => {
   // console.log("------->", dateNow)
   // const startFrom = weekFromNow(dateNow)
   // console.log("---->", startFrom)
+  const high = document.querySelector("#all-time-high")
   fetch(`https://api.coindesk.com/v1/bpi/historical/close.json?start=${startFrom}&end=${dateNow}`)
     .then(res=>res.json())
     .then(data=>{
@@ -242,6 +250,9 @@ const renderChart = async (startFrom, dateNow) => {
         y.push(value)
       }
       console.log(x)
+      highest = Math.max(...y)
+      high.innerText = `All time high: ${Math.round(highest*100)/100} USD`
+      console.log("..........", highest)
       y.push(['', '', ''])
       hisObj.data.labels = x
       hisObj.data.datasets[0].data = y
@@ -319,7 +330,7 @@ socket.onmessage = (event) => {
       diff.innerText = `+${difference} USD`
       diff.style.color = "#3BE2AB"
       statement.innerText = `An increase of ${difference} USD per BTC compared to last minute.`
-      thumb.classList.remove("fa-angle-double-down")
+      thumb.classList.remove("fa-angle-double-down", "fa-equals")
       thumb.classList.add("fa-angle-double-up")
       thumb.style.color = "#3BE2AB"
     } else if (difference < 0) {
@@ -327,8 +338,15 @@ socket.onmessage = (event) => {
       diff.style.color = "rgb(255, 99, 132)"
       statement.innerText = `A decrease of ${Math.abs(difference)} USD per BTC compared to last minute.`
       thumb.classList.add("fa-angle-double-down")
-      thumb.classList.remove("fa-angle-double-up")
+      thumb.classList.remove("fa-angle-double-up", "fa-equals")
       thumb.style.color = "rgb(255, 99, 132)"
+    } else {
+      diff.innerText = `0 USD`
+      diff.style.color = "rgba(10, 10, 10, 0.6)"
+      statement.innerText = `No change in bitcoin price compared to last minute.`
+      thumb.style.color = "rgba(10, 10, 10, 0.6)"
+      thumb.classList.add("fa-equals")
+      thumb.classList.remove("fa-angle-double-up", "fa-angle-double-down")
     }
   }
 }
