@@ -5,8 +5,8 @@ from django.http import HttpResponse, JsonResponse
 
 
 from rest_framework import viewsets
-from .serializers import PriceInMinutesSerializer, HisotircalDataSerializer
-from .models import PriceInMinutes, HistoricalData
+from .serializers import PriceInMinutesSerializer
+from .models import PriceInMinutes
 
 from .consumers import PriceConsumer
 
@@ -36,46 +36,27 @@ class PriceInMinutesViewSet(viewsets.ModelViewSet):
   queryset = PriceInMinutes.objects.all()
   serializer_class = PriceInMinutesSerializer
 
-class HistoricalDataViewSet(viewsets.ModelViewSet):
-  queryset = HistoricalData.objects.all()
-  serializer_class = HisotircalDataSerializer
 
-API_KEY=os.environ.get('API_KEY')
-API_SECRET=os.environ.get('API_SECRET')
+# API_KEY=os.environ.get('API_KEY')
+# API_SECRET=os.environ.get('API_SECRET')
 
-def get_spot(key, secret):
-  # print("number of threads", threading.active_count())
-  # print("this is ALL THE thread", threading.enumerate())
-  # print("current thread---->", threading.current_thread())
-  # start = time.time()
-  client = Client(API_KEY, API_SECRET, api_version='2020-08-25')
-  price = client.get_spot_price(currency='USD')
-  value = price.amount
-  # print("now this is current value", value)
-  print(value, datetime.datetime.now())
-  return value
-  # if value == num:
-  #   end = time.time()
-  #   t = threading.Timer(30.0 - (end-start), get_spot, [key, secret, value]).start()
-  #   return 0
-  # else:
-  #   print("---------")
-  #   data = PriceInMinutes(market_price=float(value))
-  #   data.save()
+def get_spot():
+  # client = Client(API_KEY, API_SECRET, api_version='2020-08-25')
+  # price = client.get_spot_price(currency='USD')
+  # value = price.amount
 
-  #   t = threading.Timer(60.0 - (end-start), get_spot, [key, secret, value]).start()
+  response = requests.get('https://api.coindesk.com/v1/bpi/currentprice.json')
+  usd = response.json()['bpi']['USD']['rate_float']
+  gdp = response.json()['bpi']['GBP']['rate_float']
+  eur = response.json()['bpi']['EUR']['rate_float']
+  timestamp = response.json()['time']['updated']
+
+  return [usd, gdp, eur, timestamp]
 
 
 
-# get_spot(API_KEY, API_SECRET, 0)
-# print("look at this first thread", threading.current_thread())
 
-
-
-API_KEY=os.environ.get('API_KEY')
-API_SECRET=os.environ.get('API_SECRET')
-
-def fetcher(key, secret):
+def fetcher():
   setter = 0
   checker = 1
   ws = websocket.WebSocket()
@@ -84,56 +65,25 @@ def fetcher(key, secret):
     start = time.time()
     print(threading.enumerate())
     if checker == 1:
-      value = get_spot(key, secret)
+      arr = get_spot()
       # if value == setter:
       #   end = time.time()
       #   ws.send(json.dumps({"value": None}))
       #   time.sleep(30.0 - (end-start))
       #   continue
-      data = PriceInMinutes(market_price=float(value))
+      print(arr)
+      data = PriceInMinutes(timestamp=arr[3], USD=float(arr[0]), GDP=float(arr[1]), EUR=float(arr[2]))
       data.save()
-      setter = value
+      setter = arr
       checker = 0
-      ws.send(json.dumps({"value": value}))
+      ws.send(json.dumps({"value": arr}))
       end = time.time()
       time.sleep(30.0 - (end-start))
     else:
-      ws.send(json.dumps({"value": None}))
+      ws.send(json.dumps({"value": [None]}))
       checker = 1
       time.sleep(60.0 - (datetime.datetime.now().second + datetime.datetime.now().microsecond/1000000))
 
 
-t = threading.Timer(60.0 - (datetime.datetime.now().second + datetime.datetime.now().microsecond/1000000), fetcher, [API_KEY, API_SECRET]).start()
-
-
-
-
-datetime.datetime.now().second + datetime.datetime.now().microsecond/1000000
-
-
-
-
-
-
-
-# def a():
-#   ws = websocket.WebSocket()
-#   ws.connect('ws://localhost:8000/ws/priceData/')
-#   while True:
-#     print(threading.enumerate())
-#     ws.send(json.dumps({"value": 60}))
-#     time.sleep(40)
-# t = threading.Timer(5, a).start()
-
-# ws = websocket.WebSocket()
-# ws.connect('ws://localhost:8000/ws/priceData/')
-
-# for i in range(100):
-#   ws.send(json.dumps({"value": value}))
-
-
-
-
-
-
+t = threading.Timer(60.0 - (datetime.datetime.now().second + datetime.datetime.now().microsecond/1000000), fetcher).start()
 

@@ -1,12 +1,8 @@
-from .models import PriceInMinutes, HistoricalData
+from .models import PriceInMinutes
 from rest_framework import serializers
 
 class PriceInMinutesSerializer(serializers.HyperlinkedModelSerializer):
   class Meta:
     model = PriceInMinutes
-    fields = ('timestamp', 'market_price')
+    fields = ('timestamp', 'USD', 'GDP', 'EUR')
 
-class HisotircalDataSerializer(serializers.HyperlinkedModelSerializer):
-  class Meta:
-    model = HistoricalData
-    fields = ('market_price', 'date')

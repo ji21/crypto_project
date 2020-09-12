@@ -8,7 +8,7 @@
 // } else {
 //   endpoint = `ws://${window.location.host}${window.location.pathname}`
 // }
-const host = 'http://127.0.0.1:8000/api/price/'
+const host = 'http://127.0.0.1:8000/api/price'
 
 function formatDate() {
   const today = new Date();
@@ -43,6 +43,7 @@ const arr = () => {
 
 labels = arr()
 
+var thumb = document.querySelector("#thumb")
 // console.log(endpoint)
 const endpoint = "ws://localhost:8000/ws/priceData/"
 
@@ -183,13 +184,38 @@ var hisChart = new Chart(htx, hisObj)
 
 console.log(htx)
 
-fetch('http://127.0.0.1:8000/api/price').then(res=>res.json()).then(data=>{
+
+fetch(`${host}`).then(res=>res.json()).then(data=>{
   // console.log(data.slice(data.length-7, data.length))
   if (data.length > 7) {
+    const diff = document.querySelector("#difference")
+    const statement = document.querySelector("#price-statement")
     data = data.slice(data.length-31, data.length)
-    data = data.map(x=> x.market_price)
+    console.log(data)
+    data = data.map(x=> x.USD)
     dataObj.data.datasets[0].data = data
+    const value = data[data.length - 1]
+    const old = data[data.length - 2]
+    difference = Math.round((value-old) * 100) / 100
+    console.log(diff)
+    console.log(difference)
+    if (difference > 0) {
+      diff.innerText = `+${difference} USD`
+      diff.style.color = "#3BE2AB"
+      statement.innerText = `An increase of ${difference} USD per BTC compared to last minute.`
+      thumb.classList.remove("fa-angle-double-down")
+      thumb.classList.add("fa-angle-double-up")
+      thumb.style.color = "#3BE2AB"
+    } else if (difference < 0) {
+      diff.innerText = `${difference} USD`
+      diff.style.color = "rgb(255, 99, 132)"
+      statement.innerText = `A decrease of ${Math.abs(difference)} USD per BTC compared to last minute.`
+      thumb.classList.add("fa-angle-double-down")
+      thumb.classList.remove("fa-angle-double-up")
+      thumb.style.color = "rgb(255, 99, 132)"
+    }
     chart.update()
+    priceText.innerText = `1 BTC = ${value} USD`
   }
 })
 
@@ -273,18 +299,37 @@ all.addEventListener("click", ()=>{
 })
 
 
-
+var priceText = document.querySelector("#price-text")
 
 const socket = new WebSocket(endpoint)
 socket.onmessage = (event) => {
-  value = (JSON.parse(event.data).value)
+  value = (JSON.parse(event.data).value)[0]
+  console.log(value)
   if (value !== null) {
+    const diff = document.querySelector("#difference")
+    const statement = document.querySelector("#price-statement")
+    const old = dataObj.data.datasets[0].data[30]
+    difference = Math.round((value-old) * 100) / 100
     value.toString()
-    console.log(value)
-    console.log(dataObj.data.datasets[0].data)
     dataObj.data.datasets[0].data.shift()
     dataObj.data.datasets[0].data.push(value)
     chart.update()
+    priceText.innerText = `1 BTC = ${value} USD`
+    if (difference > 0) {
+      diff.innerText = `+${difference} USD`
+      diff.style.color = "#3BE2AB"
+      statement.innerText = `An increase of ${difference} USD per BTC compared to last minute.`
+      thumb.classList.remove("fa-angle-double-down")
+      thumb.classList.add("fa-angle-double-up")
+      thumb.style.color = "#3BE2AB"
+    } else if (difference < 0) {
+      diff.innerText = `${difference} USD`
+      diff.style.color = "rgb(255, 99, 132)"
+      statement.innerText = `A decrease of ${Math.abs(difference)} USD per BTC compared to last minute.`
+      thumb.classList.add("fa-angle-double-down")
+      thumb.classList.remove("fa-angle-double-up")
+      thumb.style.color = "rgb(255, 99, 132)"
+    }
   }
 }
 
