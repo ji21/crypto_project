@@ -30,8 +30,7 @@
       </div>
       {% if request.user.is_authenticated %}
       <div id="list" class="pb-3 pt-3" style="border-bottom: 2px solid rgba(240, 243, 248)">
-        <a class="pt-3 pb-3 pr-3 pl-4 round user" style="width: 100%">Analytics</a>
-        <a class="pt-3 pb-3 pr-3 pl-4 round user" style="width: 100%">Accounts</a>
+        <a class="pt-3 pb-3 pr-3 pl-4 round user" id="accounts" href="{% url 'accounts' %}" style="width: 100%"><i class="fas fa-file-invoice-dollar mr-2"></i>Virtual Accounts</a>
       </div>
       {% else %}
         <div style="height: 3rem"></div>

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Accounts{% endblock %}
+{% block stylesheet %} <link rel="stylesheet" type="text/css" href="{% static 'css/accounts.css' %}">{% endblock %}
+
+{% block content %}
+  <div id="content" class="adjusted-width">
+    <h3 style="margin-top: 6rem;" class="mb-3">Accounts</h3>
+    <div class="d-flex" style="min-width: 600px">
+      <nav aria-label="breadcrumb" class="w-75">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'accounts' %}">My Virtual Accounts</a></li>
+          <li class="breadcrumb-item">Details</li>
+        </ol>
+      </nav>
+      <button type="button" class="btn btn-primary round-d ml-2" style="height: 48px; background-color: rgb(45, 96, 255)!important" data-toggle="modal" data-target="#exampleModalCenter">
+        Add an account
+      </button>
+    </div>
+    {% csrf_token %}
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title ml-3" id="exampleModalLongTitle">Add a virtual account</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body pt-2" style="height: 70px">
+            <input id="name" type="text" placeholder="account name..." style="height: 50px" class="w-100 pl-3 mt-1 form-control" name="account-name">
+          </div>
+          <div id="error" class="alert alert-danger mb-0" style="display: none; width: 95%; margin: 0 auto">You must enter a name</div>
+          <div class="modal-footer" style="border: none!important">
+            <button type="button" id="add" style="background-color: rgb(45, 96, 255)!important" class="btn btn-primary pl-4 pr-4">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}
+
+
+{% block scripts %}
+  <script src="{% static 'js/accounts.js' %}"></script>
+{% endblock %}

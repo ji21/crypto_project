@@ -34,6 +34,8 @@ class LoginView(View):
       try:
         user = User.objects.get(username=username)
         boo = user.check_password(password)
+        print("user", user)
+        print("password", boo)
         if user and boo:
           if user.is_active:
             auth.login(request, user)
@@ -42,6 +44,8 @@ class LoginView(View):
           else:
             messages.error(request, 'Please activate your account through email before logging in.')
             return render(request, 'authenticate/login.html')
+        else:
+          raise
       except:
           messages.error(request, 'Invalid credentials. Please try again or create an account.')
           return render(request, 'authenticate/login.html')
@@ -173,8 +177,6 @@ class LogoutView(View):
   def post(self, request):
     auth.logout(request)
     return redirect('home')
-
-
 
 
 
