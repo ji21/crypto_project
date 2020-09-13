@@ -9,7 +9,7 @@ add.addEventListener("click", ()=> {
   const error = document.querySelector("#error")
   if (value.replace(/ /g,'') !== "" && value.length < 13) {
     fetch(host, {
-      body: JSON.stringify({name: value}),
+      body: JSON.stringify({name: value.trim()}),
       method: "POST"
     }).then(res=>res.json())
       .then(data=> {

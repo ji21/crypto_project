@@ -8,6 +8,7 @@ class Account(models.Model):
   balance = models.DecimalField(blank=True, max_digits=20, decimal_places=2, null=True, default=15000.00)
   name = models.CharField(max_length=16, null=True)
   date = models.DateField(default=now)
+  original_name = models.CharField(max_length=16, null=True)
 
   def __str__(self):
     return self.name

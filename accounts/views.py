@@ -21,16 +21,18 @@ class AccountView(View):
   def post(self, request):
     data = json.loads(request.body)
     print(self.request.user)
-    name = data['name']
-
-    check = Account.objects.filter(name=name)
-
+    original_name = data['name']
+    check = Account.objects.filter(original_name=original_name)
+    name = ''
     print("...............", check)
 
-    if len(check) > 1:
-      name = name + f' ({len(check)})'
-
-    account = Account(user=self.request.user, name=name)
+    if len(check) > 0:
+      name = original_name + f' ({len(check)})'
+    else:
+      name = original_name
+    print(">>>>>>>>>>>>>>>>>>>>>>", original_name)
+    print("........................", name)
+    account = Account(user=self.request.user, name=name, original_name=original_name)
     account.save()
     return JsonResponse({'success': 'good'})
 
