@@ -6,8 +6,8 @@
 
 {% block content %}
   <div id="content" class="adjusted-width">
-    <h3 style="margin-top: 6rem;" class="mb-3">Accounts</h3>
-    <div class="d-flex" style="min-width: 600px">
+    <h3 style="margin-top: 6rem;" class="mb-5">Accounts</h3>
+    <div class="d-flex" style="min-width: 1000px">
       <nav aria-label="breadcrumb" class="w-75">
         <ol class="breadcrumb">
           <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'accounts' %}">My Virtual Accounts</a></li>
@@ -18,6 +18,35 @@
         Add an account
       </button>
     </div>
+    {% if not accounts %}
+    <div class="mt-5" style="width: 80%; min-width: 800px">
+      <div style="margin: auto; text-align: center; color: rgba(10, 10, 10, 0.6)" class="pt-3 pb-0 mb-1 pb-1 pl-4 w-100">Please create a virtual account.</div>
+    </div>
+    {% else %}
+    <ul class="pl-4 mt-3" style="width: 80%; min-width: 800px">
+      <li class="d-flex pt-3 pb-0 mb-1 pb-1 pl-4 w-100" style="border-bottom: 1px solid rgba(10, 10, 10, 0.6)">
+        <div style="margin-right: 15%">Account Name</div>
+        <div style="margin-right: 15%">Balance ($USD)</div>
+        <div style="margin-right: 15%">Date Created</div>
+        <div></div>
+      </li>
+    {% for account in accounts %}
+      <li class="d-flex pl-4 pt-3 pb-3 accounts" id="{{account.id}}">
+          <div class="pl-2" style="margin-right: 15%">{{account.name}}</div>
+          <div style="margin-right: 15%">{{account.balance}}</div>
+          <div style="margin-right: 15%">{{account.date}}</div>
+          <div style="margin: auto"><i class="fas fa-trash-alt" id="{{account.id}}" style="font-size: 18px"></i></div>
+      </li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+    <div style="height: 50px"></div>
+
+
+
+
+
+
     {% csrf_token %}
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">

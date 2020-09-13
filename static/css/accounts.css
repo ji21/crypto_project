@@ -2,3 +2,19 @@
   background-color: rgb(238, 245, 255);
   color: rgb(57, 106, 255)!important;
 }
+
+li > div {
+  width: 150px;
+  text-align: start;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+i:hover {
+  color: rgb(255, 99, 132);
+}
+
+ul {
+  color: rgb(10, 10, 10, 0.6);
+}
