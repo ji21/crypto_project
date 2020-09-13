@@ -41,6 +41,6 @@ class AccountView(View):
     Account.objects.get(pk=account_id).delete()
     return JsonResponse({'success': 'account deleted'})
 
-class InfoView(View):
+class DetailView(View):
   def get(self, request):
-    return render(request, 'accounts/info.html')
+    return render(request, 'accounts/details.html')
