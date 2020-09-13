@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.timezone import now
 
 # Create your models here.
 
@@ -12,6 +13,8 @@ class Profile(models.Model):
 class Account(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='accounts', null=True)
   balance = models.DecimalField(blank=True, max_digits=20, decimal_places=2, null=True)
+  name = models.CharField(max_length=16, null=True)
+  date = models.DateField(default=now)
 
 class Transaction(models.Model):
   account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='transactions', null=True)
