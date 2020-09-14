@@ -80,22 +80,32 @@
 }
 
 
-#this-div > a {
+#this-div a {
   grid-column-start: 2;
   grid-row-start: 2;
   grid-row-end: span 1;
   align-self: center;
 }
 
-#this-div > #balance {
-  grid-column-start: 3;
+#this-div #balance {
+  grid-column-start: 4;
   grid-column-end: span 4;
   grid-row-start: 2;
   grid-row-end: span 1;
   align-self: center;
 }
 
-#this-div > #divy {
+#this-div #create {
+  grid-column-start: 2;
+  grid-column-end: span 6;
+  grid-row-start: 2;
+  grid-row-end: span 1;
+  align-self: center;
+  color: rgba(10, 10, 10, 0.6);
+}
+
+
+#this-div #divy {
   grid-column-start: 1;
   grid-column-end: span 10;
   grid-row-start: 1;

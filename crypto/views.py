@@ -20,17 +20,21 @@ def home(request):
 
 class ChartsView(View):
   def get(self, request):
-    print(self.request.user)
-    account_set = self.request.user.accounts.all()
-    if len(account_set) == 0:
-      context = {
-        'accounts': False
-      }
+    user = self.request.user
+    print("....................................>", user)
+    if not user.is_anonymous:
+      account_set = user.accounts.all()
+      if len(account_set) == 0:
+        context = {
+          'accounts': False
+        }
+      else:
+        context = {
+          'accounts': account_set
+        }
+      return render(request, 'crypto/charts.html', context)
     else:
-      context = {
-        'accounts': account_set
-      }
-    return render(request, 'crypto/charts.html', context)
+      return render(request, 'crypto/charts.html')
 
   def post(self, request):
     data = json.loads(request.body)

@@ -404,6 +404,7 @@ document.querySelectorAll(".dropdown-item").forEach(account=> {
       .then(data=>{
         const balance = data.balance
         document.querySelector("#balance").innerText = `Account balance: ${balance} USD`
+        document.querySelector("#balance").classList.remove("ml-5")
         document.querySelector("#trans-div").style.display = "block"
       })
   })
