@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views import View
+from accounts.models import Account
+import json
 # from django.contrib.auth.decorators import login_required
 
 # import requests
@@ -18,7 +20,26 @@ def home(request):
 
 class ChartsView(View):
   def get(self, request):
-    return render(request, 'crypto/charts.html')
+    print(self.request.user)
+    account_set = self.request.user.accounts.all()
+    if len(account_set) == 0:
+      context = {
+        'accounts': False
+      }
+    else:
+      context = {
+        'accounts': account_set
+      }
+    return render(request, 'crypto/charts.html', context)
+
+  def post(self, request):
+    data = json.loads(request.body)
+    account_id = data['id']
+    account = Account.objects.get(pk=account_id)
+    balance = account.balance
+
+    return JsonResponse({'balance': balance})
+
 
 class LandingView(View):
   def get(self, request):

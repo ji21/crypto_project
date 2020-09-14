@@ -1,6 +1,7 @@
 const add = document.querySelector("#add")
 console.log(add)
 
+
 var host = '/accounts/'
 
 add.addEventListener("click", ()=> {
@@ -34,7 +35,7 @@ const deleteAccount = (event) => {
 
 document.querySelectorAll(".fa-trash-alt").forEach(i =>
     i.addEventListener("click", (event) => {
-      id = event.target.id
+      const id = event.target.id
       fetch(host, {
         body: JSON.stringify({id: id}),
         method: "DELETE"
@@ -48,8 +49,16 @@ document.querySelectorAll(".fa-trash-alt").forEach(i =>
 
 
 document.querySelectorAll(".accounts").forEach(account => {
-  account.addEventListener("click", (event)=> console.log(event.target))
+  account.addEventListener("click", (event)=> {
+    const id = event.currentTarget.id
+    console.log(id)
+    fetch(host+'details', {
+      method: 'POST',
+      body: JSON.stringify({id: id})
+    })
+  })
 })
+
 
 
 

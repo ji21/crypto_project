@@ -388,13 +388,26 @@ console.log(60000 - new Date().getSeconds()*1000)
 // 60000 - new Date().getSeconds()*1000
 
 
-
-
-
 setInterval(function() {
   if (new Date().getSeconds() === 0)updateTime();
 }, 1000);
 
+const selectTitle = document.querySelector("#dropdownMenuLink")
+document.querySelectorAll(".dropdown-item").forEach(account=> {
+  account.addEventListener("click", (event)=> {
+    selectTitle.innerText = event.target.innerText
+    const id = event.target.id
+    fetch('/charts/', {
+      body: JSON.stringify({id: id}),
+      method: "POST"
+    }).then(res=>res.json())
+      .then(data=>{
+        const balance = data.balance
+        document.querySelector("#balance").innerText = `Account balance: ${balance} USD`
+        document.querySelector("#trans-div").style.display = "block"
+      })
+  })
+})
 
 
 

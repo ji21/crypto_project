@@ -45,4 +45,14 @@ class AccountView(View):
 
 class DetailView(View):
   def get(self, request):
+
+    # id = data['id']
+    # print("....................................>", request)
     return render(request, 'accounts/details.html')
+
+  def post(self, request):
+    data = json.loads(request.body)
+    account_id = data['id']
+    return self.get
+
+

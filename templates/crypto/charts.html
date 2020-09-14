@@ -25,7 +25,23 @@
       <div class="transaction {% if not request.user.is_authenticated %}disable{% endif %}">
         <h3 class="">Make a Transaction</h3>
         {% if request.user.is_authenticated %}
-          <div class="round mt-4"></div>
+          {% csrf_token %}
+          <div class="round mt-4 d-flex align-items-center">
+            <div id="this-div" class="h-100">
+              <div class="mt-4 ml-4 mr-1" id="divy" style="color: rgba(10, 10, 10, 0.6)">Buy and sell bitcoins using virtual money in your virtual accounts. Transactions on bytimise is non-official and will not contribute in affecting the live market price.</div>
+              <a class="btn d-inline-block btn-secondary dropdown-toggle pb-3 mt-2" style="height: 40px; margin-left: auto; margin-right: 0" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Select an account
+              </a>
+              <div class="ml-3 mt-2" id="balance" style="color: rgba(10, 10, 10, 0.6); width: 265px;">Don't have a virtual account?<a href="{% url 'accounts' %}" style="display: block">Create one.</a></div>
+
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="overflow: scroll; height: 170px">
+                {% for account in accounts %}
+                <a class="dropdown-item" href="#" id="{{account.id}}">{{account.name}}</a>
+                {% endfor %}
+              </div>
+            </div>
+            <div id="trans-div" style="border-left: 2px solid rgba(240, 243, 248); width: 80%; height: 85%; display: none"></div>
+          </div>
         {% else %}
           <div class="round mt-4">
             <p style="margin: 7rem auto; width: 60%; text-align: center" class="enable">Please log in to start trading with virtual money.</p>

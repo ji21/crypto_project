@@ -72,3 +72,32 @@
     color: #fff;
     background-color: rgb(45, 96, 255)!important;
 }
+
+#this-div {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 45% 25% 40%;
+}
+
+
+#this-div > a {
+  grid-column-start: 2;
+  grid-row-start: 2;
+  grid-row-end: span 1;
+  align-self: center;
+}
+
+#this-div > #balance {
+  grid-column-start: 3;
+  grid-column-end: span 4;
+  grid-row-start: 2;
+  grid-row-end: span 1;
+  align-self: center;
+}
+
+#this-div > #divy {
+  grid-column-start: 1;
+  grid-column-end: span 10;
+  grid-row-start: 1;
+  grid-row-end: span 1;
+}
