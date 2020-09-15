@@ -33,7 +33,7 @@
               <a class="btn d-inline-block btn-secondary dropdown-toggle pb-3 mt-2" style="height: 40px; margin-left: auto; margin-right: 0; background-color: rgb(45, 96, 255); min-width: 100px" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Select an account
               </a>
-              <div class="ml-5 mt-2" id="balance" style="color: rgba(10, 10, 10, 0.6); width: 265px;">Want to start a new virtual account?<a href="{% url 'accounts' %}" style="display: block">Create one.</a></div>
+              <div class="ml-5 mt-2" id="balance" style="color: rgba(10, 10, 10, 0.6); width: 265px;">Want to use a new virtual account?<a href="{% url 'accounts' %}" style="display: block">Create one.</a></div>
 
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="overflow: scroll;">
                 {% for account in accounts %}
@@ -47,7 +47,15 @@
                 <div id="create" class="ml-5 mb-2">You ain't got no virtual accounts. <a href="{% url 'accounts' %}">Create one.</a></div>
               {% endif %}
             </div>
-            <div id="trans-div" style="border-left: 2px solid rgba(240, 243, 248); width: 80%; height: 85%; display: none"></div>
+            <div id="trans-div" style="border-left: 2px solid rgba(240, 243, 248); width: 80%; height: 85%; display: none">
+              <div class="mt-1 pl-3" style="color: rgba(10, 10, 10, 0.6)">Enter amount to buy:</div>
+              <div id="error-msg" style="font-size: 12px; display: none" class="alert alert-danger ml-3 mr-3"></div>
+              <div class="d-flex mt-3">
+                <input id="input" type="text" class="ml-3 pl-3" style="width: 60%; border-radius: 8px">
+                <button id="buy-btn" class="btn btn-primary ml-2" style="width: 25%">Buy</button>
+                <button id="sell-btn" class="btn btn-danger ml-2" style="width: 25%; display: none">Sell</button>
+              </div>
+            </div>
           </div>
         {% else %}
           <div class="round mt-4">

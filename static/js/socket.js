@@ -8,6 +8,7 @@
 // } else {
 //   endpoint = `ws://${window.location.host}${window.location.pathname}`
 // }
+var currentPrice
 const host = 'http://127.0.0.1:8000/api/price'
 
 function formatDate() {
@@ -191,14 +192,15 @@ fetch(`${host}`).then(res=>res.json()).then(data=>{
     const diff = document.querySelector("#difference")
     const statement = document.querySelector("#price-statement")
     data = data.slice(data.length-31, data.length)
-    console.log(data)
+    // console.log(data)
     data = data.map(x=> x.USD)
     dataObj.data.datasets[0].data = data
     const value = data[data.length - 1]
     const old = data[data.length - 2]
     difference = Math.round((value-old) * 100) / 100
-    console.log(diff)
-    console.log(difference)
+    currentPrice = parseInt(value)
+    // console.log(diff)
+    // console.log(difference)
     if (difference > 0) {
       diff.innerText = `+${difference} USD`
       diff.style.color = "#3BE2AB"
@@ -312,6 +314,7 @@ all.addEventListener("click", ()=>{
 
 var priceText = document.querySelector("#price-text")
 
+
 const socket = new WebSocket(endpoint)
 socket.onmessage = (event) => {
   value = (JSON.parse(event.data).value)[0]
@@ -321,6 +324,7 @@ socket.onmessage = (event) => {
     const statement = document.querySelector("#price-statement")
     const old = dataObj.data.datasets[0].data[30]
     difference = Math.round((value-old) * 100) / 100
+    currentPrice = value
     value.toString()
     dataObj.data.datasets[0].data.shift()
     dataObj.data.datasets[0].data.push(value)
@@ -392,11 +396,16 @@ setInterval(function() {
   if (new Date().getSeconds() === 0)updateTime();
 }, 1000);
 
+
+
 const selectTitle = document.querySelector("#dropdownMenuLink")
+
+var id
+
 document.querySelectorAll(".dropdown-item").forEach(account=> {
   account.addEventListener("click", (event)=> {
     selectTitle.innerText = event.target.innerText
-    const id = event.target.id
+    id = event.target.id
     fetch('/charts/', {
       body: JSON.stringify({id: id}),
       method: "POST"
@@ -411,6 +420,69 @@ document.querySelectorAll(".dropdown-item").forEach(account=> {
 })
 
 
+const buy = document.querySelector("#buy-btn")
+const sell = document.querySelector("#sell-btn")
+const input = document.querySelector("#input")
+const errorMsg = document.querySelector("#error-msg")
 
+console.log("LOOK AT THIS", input)
 
+input.addEventListener("keyup", (event) => {
+  console.log(isNaN(event.target.value))
+  if (isNaN(event.target.value)) {
+    console.log("error")
+    errorMsg.style.display = "block"
+    errorMsg.innerText = "Please enter a valid number."
+    input.classList.add("is-invalid")
+    buy.setAttribute("disabled", "true")
+  } else {
+    errorMsg.style.display = "none"
+    input.classList.remove("is-invalid")
+    buy.removeAttribute("disabled")
+  }
+})
+
+buy.addEventListener("click", ()=> {
+  console.log("................>>>", currentPrice)
+  fetch('/charts/', {
+      body: JSON.stringify({
+        amount_bought: input.value,
+        id: id,
+        btc_bought: (input.value/currentPrice).toString()
+      }),
+      method: "POST"
+    }).then(res=>res.json())
+      .then(data=> {
+        console.log(data)
+        if (data.balance !== null) {
+          input.value = ""
+          input.setAttribute('disabled', 'true')
+          buy.style.display = "none"
+          sell.style.display = "block"
+          sell.innerText = "Sell"
+          errorMsg.style.display = "none"
+          document.querySelector("#balance").innerText = `Account balance: ${data.balance} USD`
+        } else {
+          errorMsg.style.display = "block"
+          errorMsg.innerText = "Amount bought cannot be more than account balance."
+        }
+    })
+})
+
+sell.addEventListener("click", ()=> {
+  fetch('/charts/', {
+    body: JSON.stringify({
+      amount_sold: "888",
+      id: id
+    }),
+    method: "POST"
+  }).then(res=>res.json())
+    .then(data=> {
+      console.log(data)
+      sell.style.display = "none"
+      buy.style.display = "block"
+      buy.innerText = "Buy"
+      input.removeAttribute('disabled')
+  })
+})
 

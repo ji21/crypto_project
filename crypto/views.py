@@ -42,12 +42,28 @@ class ChartsView(View):
     account = Account.objects.get(pk=account_id)
     balance = account.balance
 
-    return JsonResponse({'balance': balance})
-
+    try:
+      try:
+        amount_bought = data['amount_bought']
+        btc_bought = data['btc_bought']
+        balance = int(balance) - int(amount_bought)
+        if balance >= 0:
+          return JsonResponse({'amount_bought': amount_bought, 'balance': balance, 'btc_bought': btc_bought})
+        else:
+          return JsonResponse({'balance': None}, status=400)
+      except:
+        amount_sold = data['amount_sold']
+        return JsonResponse({'amount_sold': amount_sold, 'balance': balance})
+    except:
+      return JsonResponse({'balance': balance})
 
 class LandingView(View):
   def get(self, request):
     return render(request, 'crypto/landing.html')
+
+
+
+
 
 
 

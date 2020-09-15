@@ -111,3 +111,10 @@
   grid-row-start: 1;
   grid-row-end: span 1;
 }
+
+#input {
+  border: 1px solid rgba(10, 10, 10, 0.4)!important;
+  color: #282C34;
+}
+
+
