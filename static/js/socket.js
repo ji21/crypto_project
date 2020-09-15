@@ -469,6 +469,7 @@ buy.addEventListener("click", ()=> {
           sell.innerText = "Sell"
           errorMsg.style.display = "none"
           document.querySelector("#balance").innerText = `Account balance: ${Math.round((data.new_balance + Number.EPSILON) * 100) / 100} USD`
+          document.querySelector("#market-buy-price").innerText =  `Market Buy Price: ${currentPrice} USD`
         } else {
           errorMsg.style.display = "block"
           errorMsg.innerText = "Amount bought cannot be more than account balance."
@@ -497,6 +498,7 @@ sell.addEventListener("click", ()=> {
         input.removeAttribute('disabled')
         document.querySelector("#balance").innerText = `Account balance: ${Math.round((data.new_balance + Number.EPSILON) * 100) / 100} USD`
         dropdownMenuLink.removeAttribute('disabled')
+        document.querySelector("#market-buy-price").innerText = ""
       } else {
 
       }

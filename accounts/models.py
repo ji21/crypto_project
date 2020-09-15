@@ -18,8 +18,8 @@ class Account(models.Model):
 
 class Transaction(models.Model):
   account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='transactions', null=True)
-  btc_buy_price = models.DecimalField(blank=True, max_digits=20, decimal_places=10, null=True)
-  btc_sell_price = models.DecimalField(blank=True, max_digits=20, decimal_places=10, null=True)
+  btc_buy_price = models.DecimalField(blank=True, max_digits=20, decimal_places=4, null=True)
+  btc_sell_price = models.DecimalField(blank=True, max_digits=20, decimal_places=4, null=True)
   btc_bought = models.DecimalField(blank=True, max_digits=20, decimal_places=10, null=True)
   timestamp = models.DateTimeField(auto_now_add=True, null=True, blank=True)
   #auto_now_add = True sets the current UTC time upon creation

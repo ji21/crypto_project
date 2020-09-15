@@ -55,6 +55,7 @@
                 <button disabled="true" id="buy-btn" class="btn btn-primary ml-2" style="width: 25%; {% if active %}display: none; {% else %}display: block;{% endif %}">Buy</button>
                 <button id="sell-btn" class="btn btn-danger ml-2" style="width: 25%; {% if active %}display: block; {% else %}display: none;{% endif %} background-color: rgb(255, 99, 132)!important">Sell</button>
               </div>
+              <div id="market-buy-price" class="ml-3" style="color: rgba(10, 10, 10, 0.6); margin-top: 35px">{% if active %}Market Buy Price: {{market_buy_price}} USD{% endif %}</div>
             </div>
           </div>
         {% else %}

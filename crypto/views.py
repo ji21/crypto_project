@@ -31,16 +31,19 @@ class ChartsView(View):
       else:
         active = False
         active_account = None
+        market_buy_price = False
         for account in account_set:
           if account.active:
             active_account = account
             active = True
+            market_buy_price = round(account.transactions.latest("timestamp").btc_buy_price, 2)
             break
 
         context = {
           'accounts': account_set,
           'active': active,
-          'active_account': active_account
+          'active_account': active_account,
+          'market_buy_price': market_buy_price
         }
       return render(request, 'crypto/charts.html', context)
     else:
