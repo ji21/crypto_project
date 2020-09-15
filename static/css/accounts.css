@@ -3,12 +3,13 @@
   color: rgb(57, 106, 255)!important;
 }
 
-li > div {
+a > div {
   width: 150px;
   text-align: start;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: rgba(10, 10, 10, 0.6);
 }
 
 i:hover {

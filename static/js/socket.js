@@ -198,7 +198,7 @@ fetch(`${host}`).then(res=>res.json()).then(data=>{
     const value = data[data.length - 1]
     const old = data[data.length - 2]
     difference = Math.round((value-old) * 100) / 100
-    currentPrice = parseInt(value)
+    currentPrice = value
     // console.log(diff)
     // console.log(difference)
     if (difference > 0) {
@@ -404,10 +404,11 @@ var id
 
 document.querySelectorAll(".dropdown-item").forEach(account=> {
   account.addEventListener("click", (event)=> {
+    const id = event.target.id
     selectTitle.innerText = event.target.innerText
-    id = event.target.id
+    selectTitle.setAttribute("account_id", `${id}`)
     fetch('/charts/', {
-      body: JSON.stringify({id: id}),
+      body: JSON.stringify({account_id: id}),
       method: "POST"
     }).then(res=>res.json())
       .then(data=>{
@@ -435,6 +436,10 @@ input.addEventListener("keyup", (event) => {
     errorMsg.innerText = "Please enter a valid number."
     input.classList.add("is-invalid")
     buy.setAttribute("disabled", "true")
+  } else if (event.target.value.length === 0) {
+    errorMsg.style.display = "none"
+    input.classList.remove("is-invalid")
+    buy.setAttribute("disabled", 'true')
   } else {
     errorMsg.style.display = "none"
     input.classList.remove("is-invalid")
@@ -444,11 +449,12 @@ input.addEventListener("keyup", (event) => {
 
 buy.addEventListener("click", ()=> {
   console.log("................>>>", currentPrice)
+  const id = selectTitle.getAttribute('account_id')
   fetch('/charts/', {
       body: JSON.stringify({
-        amount_bought: input.value,
-        id: id,
-        btc_bought: (input.value/currentPrice).toString()
+        amount_invested: input.value,
+        account_id: id,
+        current_price: currentPrice
       }),
       method: "POST"
     }).then(res=>res.json())
@@ -457,11 +463,12 @@ buy.addEventListener("click", ()=> {
         if (data.balance !== null) {
           input.value = ""
           input.setAttribute('disabled', 'true')
+          dropdownMenuLink.setAttribute('disabled', 'true')
           buy.style.display = "none"
           sell.style.display = "block"
           sell.innerText = "Sell"
           errorMsg.style.display = "none"
-          document.querySelector("#balance").innerText = `Account balance: ${data.balance} USD`
+          document.querySelector("#balance").innerText = `Account balance: ${Math.round((data.new_balance + Number.EPSILON) * 100) / 100} USD`
         } else {
           errorMsg.style.display = "block"
           errorMsg.innerText = "Amount bought cannot be more than account balance."
@@ -470,19 +477,29 @@ buy.addEventListener("click", ()=> {
 })
 
 sell.addEventListener("click", ()=> {
+  const id = selectTitle.getAttribute('account_id')
+  console.log(id)
   fetch('/charts/', {
     body: JSON.stringify({
       amount_sold: "888",
-      id: id
+      account_id: id,
+      current_price: currentPrice
     }),
     method: "POST"
   }).then(res=>res.json())
     .then(data=> {
       console.log(data)
-      sell.style.display = "none"
-      buy.style.display = "block"
-      buy.innerText = "Buy"
-      input.removeAttribute('disabled')
+      if (data.new_balance >= 0) {
+        sell.style.display = "none"
+        buy.style.display = "block"
+        buy.innerText = "Buy"
+        buy.setAttribute('disabled', 'true')
+        input.removeAttribute('disabled')
+        document.querySelector("#balance").innerText = `Account balance: ${Math.round((data.new_balance + Number.EPSILON) * 100) / 100} USD`
+        dropdownMenuLink.removeAttribute('disabled')
+      } else {
+
+      }
   })
 })
 

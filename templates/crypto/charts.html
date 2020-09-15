@@ -30,10 +30,10 @@
             <div id="this-div" class="h-100">
               <div class="mt-4 ml-4 mr-1" id="divy" style="color: rgba(10, 10, 10, 0.6);">Buy and sell bitcoins using virtual money in your virtual accounts. Transactions on bytimise is non-official and will not contribute in affecting the live market price.</div>
               {% if accounts %}
-              <a class="btn d-inline-block btn-secondary dropdown-toggle pb-3 mt-2" style="height: 40px; margin-left: auto; margin-right: 0; background-color: rgb(45, 96, 255); min-width: 100px" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Select an account
-              </a>
-              <div class="ml-5 mt-2" id="balance" style="color: rgba(10, 10, 10, 0.6); width: 265px;">Want to use a new virtual account?<a href="{% url 'accounts' %}" style="display: block">Create one.</a></div>
+              <button {% if active %} disabled="true" account_id="{{active_account.id}}" {% endif %} class="btn d-inline-block btn-primary dropdown-toggle pb-3 mt-2" style="height: 40px; margin-left: auto; margin-right: 0; min-width: 100px" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {% if active %} {{active_account.name}} {% else %}Select an account{% endif %}
+              </button>
+              <div class="{% if active %}ml-0{% else %}ml-5{% endif %} mt-2" id="balance" style="color: rgba(10, 10, 10, 0.6); width: 265px;">{% if active %}Account Balance: {{active_account.new_balance}} USD{% else %}Want to use a new virtual account?<a href="{% url 'accounts' %}" style="display: block">Create one.</a>{% endif %}</div>
 
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="overflow: scroll;">
                 {% for account in accounts %}
@@ -41,19 +41,19 @@
                 {% endfor %}
               </div>
               {% else %}
-                <button disabled="true" class="ml-5 btn d-inline-block btn-secondary dropdown-toggle pb-3 mt-2" style="height: 40px; margin-left: auto; margin-right: 0; background-color: rgb(45, 96, 255)" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button disabled="true" class="ml-5 btn d-inline-block btn-primary dropdown-toggle pb-3 mt-2" style="height: 40px; margin-left: auto; margin-right: 0;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Select an account
                 </button>
-                <div id="create" class="ml-5 mb-2">You ain't got no virtual accounts. <a href="{% url 'accounts' %}">Create one.</a></div>
+                <div id="create" class="ml-5 mt-3 mb-2">You ain't got no virtual accounts. <a href="{% url 'accounts' %}">Create one.</a></div>
               {% endif %}
             </div>
-            <div id="trans-div" style="border-left: 2px solid rgba(240, 243, 248); width: 80%; height: 85%; display: none">
+            <div id="trans-div" style="border-left: 2px solid rgba(240, 243, 248); width: 80%; height: 85%; {% if active %}display: block; {% else %}display: none;{% endif %}">
               <div class="mt-1 pl-3" style="color: rgba(10, 10, 10, 0.6)">Enter amount to buy:</div>
               <div id="error-msg" style="font-size: 12px; display: none" class="alert alert-danger ml-3 mr-3"></div>
               <div class="d-flex mt-3">
-                <input id="input" type="text" class="ml-3 pl-3" style="width: 60%; border-radius: 8px">
-                <button id="buy-btn" class="btn btn-primary ml-2" style="width: 25%">Buy</button>
-                <button id="sell-btn" class="btn btn-danger ml-2" style="width: 25%; display: none">Sell</button>
+                <input id="input" {% if active %} disabled = "true" {% endif %}type="text" class="ml-3 pl-3" style="width: 60%; border-radius: 8px">
+                <button disabled="true" id="buy-btn" class="btn btn-primary ml-2" style="width: 25%; {% if active %}display: none; {% else %}display: block;{% endif %}">Buy</button>
+                <button id="sell-btn" class="btn btn-danger ml-2" style="width: 25%; {% if active %}display: block; {% else %}display: none;{% endif %} background-color: rgb(255, 99, 132)!important">Sell</button>
               </div>
             </div>
           </div>

@@ -14,7 +14,7 @@
           <li class="breadcrumb-item"> </li>
         </ol>
       </nav>
-      <button type="button" class="btn btn-primary round-d ml-2" style="height: 48px; background-color: rgb(45, 96, 255)!important" data-toggle="modal" data-target="#exampleModalCenter">
+      <button type="button" class="btn btn-primary round-d ml-2" style="height: 48px;" data-toggle="modal" data-target="#exampleModalCenter">
         Add an account
       </button>
     </div>
@@ -24,21 +24,23 @@
     </div>
     {% else %}
     <ul class="pl-4 mt-3" style="width: 80%; min-width: 800px">
-      <li class="d-flex pt-3 pb-0 mb-1 pb-1 pl-4 w-100" style="border-bottom: 1px solid rgba(10, 10, 10, 0.6)">
+      <li class="d-flex pt-3 pb-0 mb-1 pb-1 pl-4 w-100" style="border-bottom: 2px solid rgba(50, 50, 50, 0.2)">
         <div style="margin-right: 15%">Account Name</div>
         <div style="margin-right: 15%">Balance ($USD)</div>
         <div style="margin-right: 15%">Date Created</div>
         <div></div>
       </li>
-    {% for account in accounts %}
-      <li class="d-flex pl-4 pt-3 pb-3 accounts" id="{{account.id}}">
-          <div class="pl-2" style="margin-right: 15%">{{account.name}}</div>
-          <div style="margin-right: 15%">{{account.balance}}</div>
-          <div style="margin-right: 15%">{{account.date}}</div>
-          <div style="margin: auto"><i class="fas fa-trash-alt" id="{{account.id}}" style="font-size: 18px"></i></div>
-      </li>
-    {% endfor %}
     </ul>
+    <div class="list-group">
+    {% for account in accounts %}
+      <a href="#" class="list-group-item list-group-item-action d-flex w-75 ml-4">
+        <div class="pl-2" style="margin-right: 15%">{{account.name}}</div>
+        <div style="margin-right: 15%">{{account.balance}}</div>
+        <div style="margin-right: 15%">{{account.date}}</div>
+        <div style="margin: auto"><i class="fas fa-trash-alt" id="{{account.id}}" style="font-size: 18px"></i></div>
+      </a>
+    {% endfor %}
+    </div>
     {% endif %}
     <div style="height: 50px"></div>
 
