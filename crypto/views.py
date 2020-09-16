@@ -121,7 +121,7 @@ class ChartsView(View):
         account.active = False
         account.save()
         usd_gained = round(usd_gained, 2)
-        btc_bought = round(btc_bought, 2)
+        btc_bought = round(btc_bought, 3)
         current_price = round(current_price, 4)
         return JsonResponse({'balance': balance, 'new_balance': new_balance, 'usd_gained': usd_gained, 'usd_invested': usd_invested, 'btc_bought': btc_bought, 'current_price': current_price})
     except:

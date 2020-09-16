@@ -8,6 +8,7 @@
 
 h3 {
   color: rgba(10, 10, 10, 0.7);
+  min-width: 300px;
 }
 
 #spacer {

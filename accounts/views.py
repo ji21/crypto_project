@@ -43,16 +43,36 @@ class AccountView(View):
     Account.objects.get(pk=account_id).delete()
     return JsonResponse({'success': 'account deleted'})
 
-class DetailView(View):
-  def get(self, request):
+class TransactionHistoryView(View):
+  def get(self, request, id):
+    account = Account.objects.get(pk=id)
+    trans = account.transactions.all()
+    arr = []
+    print("trans", len(trans))
+    for i in range(len(trans)):
+      arr += [i+1]
+    transactions = dict(zip(arr, trans))
+    context = {
+      'transactions': transactions,
+      'account': account,
+      'length': len(trans)
+    }
 
-    # id = data['id']
-    # print("....................................>", request)
-    return render(request, 'accounts/details.html')
+    return render(request, 'accounts/transaction_history.html', context)
 
-  def post(self, request):
-    data = json.loads(request.body)
-    account_id = data['id']
-    return self.get
+  def post(self, request, id):
+    # data = json.loads(request.body)
+    # check = data.data
+    account = Account.objects.get(pk=id)
+    transactions = account.transactions.all().values()
+
+
+    return JsonResponse({"list": list(transactions)})
+
+
+
+
+
+
 
 

@@ -317,7 +317,7 @@ var priceText = document.querySelector("#price-text")
 
 const socket = new WebSocket(endpoint)
 socket.onmessage = (event) => {
-  value = (JSON.parse(event.data).value)[0]
+  value = JSON.parse(event.data).value
   console.log(value)
   if (value !== null) {
     const diff = document.querySelector("#difference")
