@@ -32,18 +32,21 @@ class ChartsView(View):
         active = False
         active_account = None
         market_buy_price = False
+        btc_bought = False
         for account in account_set:
           if account.active:
             active_account = account
             active = True
-            market_buy_price = round(account.transactions.latest("timestamp").btc_buy_price, 2)
+            market_buy_price = round(account.transactions.latest("timestamp").btc_buy_price, 4)
+            btc_bought = round(account.transactions.latest("timestamp").btc_bought, 2)
             break
 
         context = {
           'accounts': account_set,
           'active': active,
           'active_account': active_account,
-          'market_buy_price': market_buy_price
+          'market_buy_price': market_buy_price,
+          'btc_bought': btc_bought
         }
       return render(request, 'crypto/charts.html', context)
     else:
@@ -81,7 +84,7 @@ class ChartsView(View):
           account.active = True
           account.save()
           print("balance again............", balance)
-          return JsonResponse({'amount_invested': amount_invested, 'new_balance': balance, 'current_price': current_price})
+          return JsonResponse({'amount_invested': amount_invested, 'new_balance': balance, 'btc_bought': btc_bought})
         else:
           return JsonResponse({'balance': None}, status=400)
       except:
@@ -98,6 +101,7 @@ class ChartsView(View):
         # print(btc_earned)
         # print(type(btc_earned))
         usd_invested = float(transaction.usd_invested)
+        btc_bought = float(transaction.btc_bought)
         usd_gained = ((current_price/buy_price) * usd_invested) - usd_invested
         # print(".................", usd_gained)
         # print("balance when sold", balance)
@@ -116,7 +120,10 @@ class ChartsView(View):
         account.new_balance = new_balance
         account.active = False
         account.save()
-        return JsonResponse({'balance': balance, 'new_balance': new_balance, 'btc_earned': btc_earned})
+        usd_gained = round(usd_gained, 2)
+        btc_bought = round(btc_bought, 2)
+        current_price = round(current_price, 4)
+        return JsonResponse({'balance': balance, 'new_balance': new_balance, 'usd_gained': usd_gained, 'usd_invested': usd_invested, 'btc_bought': btc_bought, 'current_price': current_price})
     except:
       return JsonResponse({'balance': balance})
 

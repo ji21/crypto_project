@@ -216,7 +216,7 @@ fetch(`${host}`).then(res=>res.json()).then(data=>{
       thumb.classList.remove("fa-angle-double-up", "fa-equals")
       thumb.style.color = "rgb(255, 99, 132)"
     } else {
-      diff.innerText = `0 USD`
+      diff.innerText = ``
       diff.style.color = "rgba(10, 10, 10, 0.6)"
       statement.innerText = `No change in bitcoin price compared to last minute.`
       thumb.style.color = "rgba(10, 10, 10, 0.6)"
@@ -345,7 +345,7 @@ socket.onmessage = (event) => {
       thumb.classList.remove("fa-angle-double-up", "fa-equals")
       thumb.style.color = "rgb(255, 99, 132)"
     } else {
-      diff.innerText = `0 USD`
+      diff.innerText = ``
       diff.style.color = "rgba(10, 10, 10, 0.6)"
       statement.innerText = `No change in bitcoin price compared to last minute.`
       thumb.style.color = "rgba(10, 10, 10, 0.6)"
@@ -414,7 +414,7 @@ document.querySelectorAll(".dropdown-item").forEach(account=> {
       .then(data=>{
         const balance = data.balance
         document.querySelector("#balance").innerText = `Account balance: ${balance} USD`
-        document.querySelector("#balance").classList.remove("ml-5")
+        // document.querySelector("#balance").classList.remove("ml-5")
         document.querySelector("#trans-div").style.display = "block"
       })
   })
@@ -469,7 +469,7 @@ buy.addEventListener("click", ()=> {
           sell.innerText = "Sell"
           errorMsg.style.display = "none"
           document.querySelector("#balance").innerText = `Account balance: ${Math.round((data.new_balance + Number.EPSILON) * 100) / 100} USD`
-          document.querySelector("#market-buy-price").innerText =  `Market Buy Price: ${currentPrice} USD`
+          document.querySelector("#market-buy-price").innerText =  `You bought ${Math.round((data.btc_bought + Number.EPSILON) * 1000) / 1000} Bitcoin(s) at ${currentPrice} USD/BTC.`
         } else {
           errorMsg.style.display = "block"
           errorMsg.innerText = "Amount bought cannot be more than account balance."
@@ -498,8 +498,13 @@ sell.addEventListener("click", ()=> {
         input.removeAttribute('disabled')
         document.querySelector("#balance").innerText = `Account balance: ${Math.round((data.new_balance + Number.EPSILON) * 100) / 100} USD`
         dropdownMenuLink.removeAttribute('disabled')
-        document.querySelector("#market-buy-price").innerText = ""
-      } else {
+        if (data.usd_gained > 0) {
+          document.querySelector("#market-buy-price").innerText = `You earned ${data.usd_gained} USD from selling ${data.btc_bought} Bitcoin(s) at ${data.current_price} USD/BTC.`
+        } else if (data.usd_gained < 0) {
+          document.querySelector("#market-buy-price").innerText = `You lost ${Math.abs(data.usd_gained)} USD from selling ${data.btc_bought} Bitcoin(s) at ${data.current_price} USD/BTC.`
+        } else {
+          document.querySelector("#market-buy-price").innerText = `WTF`
+        }
 
       }
   })
