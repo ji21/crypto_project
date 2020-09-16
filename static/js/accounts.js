@@ -2,6 +2,7 @@ const add = document.querySelector("#add")
 console.log(add)
 
 
+
 var host = '/accounts/'
 
 add.addEventListener("click", ()=> {
@@ -35,6 +36,7 @@ const deleteAccount = (event) => {
 
 document.querySelectorAll(".fa-trash-alt").forEach(i =>
     i.addEventListener("click", (event) => {
+      event.stopPropagation()
       const id = event.target.id
       fetch(host, {
         body: JSON.stringify({id: id}),
